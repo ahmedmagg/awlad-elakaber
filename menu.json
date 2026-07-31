@@ -65,6 +65,36 @@
           "price": 20,
           "image": "https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?w=400",
           "bestSeller": false
+        },
+        {
+          "id": "t1",
+          "name": "شاي",
+          "nameEn": "Tea",
+          "description": "شاي أحمر مصري تقليدي بنكهة أصيلة",
+          "descriptionEn": "Traditional Egyptian red tea with authentic flavor",
+          "price": 15,
+          "image": "https://images.unsplash.com/photo-1597318181409-cf64d0b5d8a2?w=400",
+          "bestSeller": true
+        },
+        {
+          "id": "t3",
+          "name": "شاي بالنعناع",
+          "nameEn": "Mint Tea",
+          "description": "شاي بالنعناع الطازج المنعش",
+          "descriptionEn": "Refreshing tea with fresh mint",
+          "price": 18,
+          "image": "https://images.unsplash.com/photo-1571934811356-5cc55449d0a4?w=400",
+          "bestSeller": false
+        },
+        {
+          "id": "t4",
+          "name": "شاي بالحليب",
+          "nameEn": "Milk Tea",
+          "description": "شاي بالحليب الكريمي بنكهة مميزة",
+          "descriptionEn": "Creamy milk tea with special flavor",
+          "price": 22,
+          "image": "https://images.unsplash.com/photo-1558160074-4d7d8bdf4256?w=400",
+          "bestSeller": false
         }
       ]
     },
@@ -223,102 +253,6 @@
       ]
     },
     {
-      "id": "fast-food",
-      "name": "وجبات سريعة",
-      "nameEn": "Fast Food",
-      "icon": "🍕",
-      "items": [
-        {
-          "id": "ff1",
-          "name": "بيتزا مارجريتا",
-          "nameEn": "Margherita Pizza",
-          "description": "بيتزا مارجريتا كلاسيكية بالجبن والريحان",
-          "descriptionEn": "Classic Margherita pizza with cheese and basil",
-          "price": 75,
-          "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400",
-          "bestSeller": true
-        },
-        {
-          "id": "ff2",
-          "name": "برجر لحم",
-          "nameEn": "Beef Burger",
-          "description": "برجر لحم شهي مع جبن وخضروات",
-          "descriptionEn": "Delicious beef burger with cheese and vegetables",
-          "price": 65,
-          "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400",
-          "bestSeller": true
-        },
-        {
-          "id": "ff3",
-          "name": "ساندويتش دجاج مشوي",
-          "nameEn": "Grilled Chicken Sandwich",
-          "description": "ساندويتش دجاج مشوي مع صوص خاص",
-          "descriptionEn": "Grilled chicken sandwich with special sauce",
-          "price": 55,
-          "image": "https://images.unsplash.com/photo-1521390188846-e2a3a97453a0?w=400",
-          "bestSeller": false
-        },
-        {
-          "id": "ff4",
-          "name": "باستا ألفريدو",
-          "nameEn": "Alfredo Pasta",
-          "description": "باستا كريمية مع صوص ألفريدو والدجاج",
-          "descriptionEn": "Creamy pasta with Alfredo sauce and chicken",
-          "price": 70,
-          "image": "https://images.unsplash.com/photo-1645112411341-6c4fd023714a?w=400",
-          "bestSeller": false
-        }
-      ]
-    },
-    {
-      "id": "snacks",
-      "name": "سناكس",
-      "nameEn": "Snacks",
-      "icon": "🍟",
-      "items": [
-        {
-          "id": "sn1",
-          "name": "بطاطس مقلية",
-          "nameEn": "French Fries",
-          "description": "بطاطس مقلية مقرمشة مع صوصات متنوعة",
-          "descriptionEn": "Crispy french fries with assorted sauces",
-          "price": 25,
-          "image": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400",
-          "bestSeller": false
-        },
-        {
-          "id": "sn2",
-          "name": "أصابع موزاريلا",
-          "nameEn": "Mozzarella Sticks",
-          "description": "أصابع موزاريلا مقلية مع صوص الطماطم",
-          "descriptionEn": "Fried mozzarella sticks with tomato sauce",
-          "price": 40,
-          "image": "https://images.unsplash.com/photo-1548340748-6d2f2f23fb7d?w=400",
-          "bestSeller": false
-        },
-        {
-          "id": "sn3",
-          "name": "أجنحة دجاج",
-          "nameEn": "Chicken Wings",
-          "description": "أجنحة دجاج مقلية حارة ولذيذة",
-          "descriptionEn": "Spicy and delicious fried chicken wings",
-          "price": 50,
-          "image": "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=400",
-          "bestSeller": true
-        },
-        {
-          "id": "sn4",
-          "name": "ناجتس دجاج",
-          "nameEn": "Chicken Nuggets",
-          "description": "ناجتس دجاج مقرمشة مع صوص الباربيكيو",
-          "descriptionEn": "Crispy chicken nuggets with BBQ sauce",
-          "price": 35,
-          "image": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400",
-          "bestSeller": false
-        }
-      ]
-    },
-    {
       "id": "milkshakes",
       "name": "ميلك شيك",
       "nameEn": "Milkshakes",
@@ -341,7 +275,7 @@
           "description": "ميلك شيك شوكولاتة غني مع رقائق الشوكولاتة",
           "descriptionEn": "Rich chocolate milkshake with chocolate chips",
           "price": 45,
-          "image": "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=400",
+          "image": "https://kimi-web-img.moonshot.cn/img/www.queensleeappetit.com/f8619800b24828fca659aacbd9351f536e87ba51.jpg",
           "bestSeller": true
         },
         {
@@ -351,7 +285,7 @@
           "description": "ميلك شيك فراولة منعش مع فواكه طازجة",
           "descriptionEn": "Refreshing strawberry milkshake with fresh fruits",
           "price": 45,
-          "image": "https://images.unsplash.com/photo-1579954115563-e72bf1381629?w=400",
+          "image": "https://kimi-web-img.moonshot.cn/img/www.cookingclassy.com/e32272e75352dcd62d949a38f6f40bbc26b535ce.jpg",
           "bestSeller": false
         },
         {
@@ -367,76 +301,55 @@
       ]
     },
     {
-      "id": "ice-cream",
-      "name": "آيس كريم",
-      "nameEn": "Ice Cream",
-      "icon": "🍨",
+      "id": "coffee-mix",
+      "name": "كوفي ميكس",
+      "nameEn": "Coffee Mix",
+      "icon": "☕",
       "items": [
         {
-          "id": "ic1",
-          "name": "آيس كريم فانيليا",
-          "nameEn": "Vanilla Ice Cream",
-          "description": "آيس كريم فانيليا كلاسيكي كريمي",
-          "descriptionEn": "Classic creamy vanilla ice cream",
-          "price": 25,
-          "image": "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=400",
-          "bestSeller": false
-        },
-        {
-          "id": "ic2",
-          "name": "آيس كريم شوكولاتة",
-          "nameEn": "Chocolate Ice Cream",
-          "description": "آيس كريم شوكولاتة غني وكريمي",
-          "descriptionEn": "Rich and creamy chocolate ice cream",
+          "id": "cm1",
+          "name": "كوفي ميكس كلاسيك",
+          "nameEn": "Classic Coffee Mix",
+          "description": "مزيج كلاسيكي من القهوة والكريمة",
+          "descriptionEn": "Classic blend of coffee and cream",
           "price": 30,
-          "image": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400",
+          "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400",
           "bestSeller": true
         },
         {
-          "id": "ic3",
-          "name": "سنداي فراولة",
-          "nameEn": "Strawberry Sundae",
-          "description": "سنداي فراولة مع صوص الفراولة والمكسرات",
-          "descriptionEn": "Strawberry sundae with strawberry sauce and nuts",
-          "price": 40,
-          "image": "https://images.unsplash.com/photo-1560008581-09826d1de69e?w=400",
+          "id": "cm2",
+          "name": "كوفي ميكس كراميل",
+          "nameEn": "Caramel Coffee Mix",
+          "description": "كوفي ميكس بنكهة الكراميل اللذيذة",
+          "descriptionEn": "Coffee mix with delicious caramel flavor",
+          "price": 35,
+          "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400",
           "bestSeller": false
         },
         {
-          "id": "ic4",
-          "name": "آيس كريم مكس",
-          "nameEn": "Mixed Ice Cream",
-          "description": "ثلاث نكهات مختلطة من آيس كريم الكريمة",
-          "descriptionEn": "Three mixed flavors of cream ice cream",
+          "id": "cm3",
+          "name": "كوفي ميكس هازلنوت",
+          "nameEn": "Hazelnut Coffee Mix",
+          "description": "كوفي ميكس بنكهة البندق الفاخرة",
+          "descriptionEn": "Coffee mix with premium hazelnut flavor",
           "price": 35,
-          "image": "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=400",
+          "image": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400",
+          "bestSeller": false
+        },
+        {
+          "id": "cm4",
+          "name": "كوفي ميكس فانيليا",
+          "nameEn": "Vanilla Coffee Mix",
+          "description": "كوفي ميكس بنكهة الفانيليا الناعمة",
+          "descriptionEn": "Coffee mix with smooth vanilla flavor",
+          "price": 32,
+          "image": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400",
           "bestSeller": false
         }
       ]
     }
   ],
-  "offers": [
-    {
-      "id": "off1",
-      "title": "عرض الإفطار",
-      "titleEn": "Breakfast Offer",
-      "description": "قهوة تركي + بسبوسة بـ 45 جنيه فقط",
-      "descriptionEn": "Turkish coffee + Basbousa for only 45 EGP",
-      "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400",
-      "oldPrice": 55,
-      "newPrice": 45
-    },
-    {
-      "id": "off2",
-      "title": "عرض العائلة",
-      "titleEn": "Family Offer",
-      "description": "بيتزا مارجريتا + 2 عصير برتقال بـ 120 جنيه",
-      "descriptionEn": "Margherita pizza + 2 orange juices for 120 EGP",
-      "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400",
-      "oldPrice": 135,
-      "newPrice": 120
-    }
-  ],
+  "offers": [],
   "todaysSpecial": {
     "id": "ts1",
     "name": "موكا مثلج",
