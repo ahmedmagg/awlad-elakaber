@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="كافيه أولاد الأكابر - أجود المشروبات والمأكولات في مكان واحد">
+    <meta name="theme-color" content="#111111">
+    <title>كافيه أولاد الأكابر | Awlad El Akaber Cafe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --matte-black: #111111;
+            --dark-brown: #3E2723;
+            --gold: #D4AF37;
+            --gold-light: #E8C84A;
+            --gold-dark: #B8962E;
+            --white: #FFFFFF;
+            --off-white: #F5F0EB;
+            --cream: #FAF7F2;
+            --gray-light: #E5E5E5;
+            --gray: #888888;
+            --gray-dark: #333333;
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.12);
+            --shadow-medium: 0 12px 40px rgba(0, 0, 0, 0.18);
+            --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.25);
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            --font-arabic: 'Cairo', sans-serif;
+            --font-display: 'Playfair Display', serif;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: var(--matte-black);
+            --bg-secondary: #1a1a1a;
+            --bg-card: #1e1e1e;
+            --text-primary: var(--white);
+            --text-secondary: #cccccc;
+            --text-muted: #888888;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: var(--cream);
+            --bg-secondary: var(--white);
+            --bg-card: var(--white);
+            --text-primary: var(--matte-black);
+            --text-secondary: var(--dark-brown);
+            --text-muted: var(--gray);
+            --border-color: rgba(0, 0, 0, 0.08);
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.8);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: var(--font-arabic);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+            transition: background var(--transition-normal), color var(--transition-normal);
+        }
+
+        .loading-screen {
+            position: fixed; inset: 0; background: var(--matte-black);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .loading-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loading-logo {
+            width: 100px; height: 100px; border: 3px solid var(--gold); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem; color: var(--gold);
+            animation: pulse-gold 2s ease-in-out infinite;
+            margin-bottom: 1.5rem;
+        }
+        .loading-text { color: var(--gold); font-size: 1.5rem; font-weight: 700; letter-spacing: 2px; }
+        .loading-bar { width: 200px; height: 3px; background: rgba(212,175,55,0.2); border-radius: 3px; margin-top: 1.5rem; overflow: hidden; }
+        .loading-bar-inner { height: 100%; background: var(--gold); border-radius: 3px; animation: loading-progress 1.5s ease-in-out forwards; }
+        @keyframes pulse-gold { 0%,100% { box-shadow: 0 0 0 0 rgba(212,175,55,0.4); } 50% { box-shadow: 0 0 0 20px rgba(212,175,55,0); } }
+        @keyframes loading-progress { 0% { width: 0%; } 100% { width: 100%; } }
+
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 1rem 0; transition: all var(--transition-normal); background: transparent;
+        }
+        .navbar.scrolled {
+            background: rgba(17,17,17,0.95); backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3); padding: 0.6rem 0;
+        }
+        [data-theme="light"] .navbar.scrolled { background: rgba(250,247,242,0.95); box-shadow: 0 4px 30px rgba(0,0,0,0.1); }
+        .navbar-container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; }
+        .navbar-logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--gold); font-weight: 800; font-size: 1.3rem; }
+        .navbar-logo-icon { width: 42px; height: 42px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--matte-black); font-size: 1.2rem; }
+        .navbar-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+        .navbar-links a { color: var(--white); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: color var(--transition-fast); position: relative; }
+        [data-theme="light"] .navbar-links a { color: var(--matte-black); }
+        .navbar-links a::after { content: ''; position: absolute; bottom: -4px; right: 0; width: 0; height: 2px; background: var(--gold); transition: width var(--transition-normal); }
+        .navbar-links a:hover::after, .navbar-links a.active::after { width: 100%; }
+        .navbar-links a:hover, .navbar-links a.active { color: var(--gold); }
+        .navbar-actions { display: flex; align-items: center; gap: 0.75rem; }
+        .nav-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--glass-border); background: var(--glass-bg); backdrop-filter: blur(10px); color: var(--white); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: all var(--transition-fast); }
+        [data-theme="light"] .nav-btn { color: var(--matte-black); background: rgba(255,255,255,0.8); border-color: rgba(0,0,0,0.1); }
+        .nav-btn:hover { background: var(--gold); color: var(--matte-black); border-color: var(--gold); transform: translateY(-2px); }
+        .cart-btn { position: relative; }
+        .cart-count { position: absolute; top: -4px; left: -4px; background: var(--gold); color: var(--matte-black); font-size: 0.7rem; font-weight: 700; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .mobile-menu-btn { display: none; }
+
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            position: relative; background: linear-gradient(135deg, var(--matte-black) 0%, var(--dark-brown) 50%, #1a0f0a 100%);
+            overflow: hidden; padding: 6rem 1.5rem 4rem;
+        }
+        .hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); opacity: 0.5; }
+        .hero-glow { position: absolute; width: 500px; height: 500px; background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; }
+        .hero-content { text-align: center; position: relative; z-index: 2; max-width: 700px; }
+        .hero-logo { width: 120px; height: 120px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; font-size: 3rem; box-shadow: 0 0 60px rgba(212,175,55,0.3); animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .hero-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: var(--white); margin-bottom: 0.5rem; line-height: 1.2; }
+        .hero-title span { color: var(--gold); }
+        .hero-subtitle { font-size: clamp(1rem, 2.5vw, 1.4rem); color: rgba(255,255,255,0.8); margin-bottom: 2.5rem; font-weight: 300; }
+        .hero-info { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; margin-bottom: 2.5rem; }
+        .hero-info-item { display: flex; align-items: center; gap: 0.5rem; background: var(--glass-bg); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); padding: 0.75rem 1.25rem; border-radius: var(--radius-xl); color: var(--white); font-size: 0.9rem; }
+        .hero-info-item svg { width: 18px; height: 18px; color: var(--gold); flex-shrink: 0; }
+        .hero-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem 2.5rem; border-radius: var(--radius-xl); font-family: var(--font-arabic); font-size: 1rem; font-weight: 700; cursor: pointer; transition: all var(--transition-normal); text-decoration: none; border: none; outline: none; }
+        .btn-primary { background: var(--gold); color: var(--matte-black); box-shadow: var(--shadow-gold); }
+        .btn-primary:hover { background: var(--gold-light); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(212,175,55,0.4); }
+        .btn-secondary { background: transparent; color: var(--white); border: 2px solid var(--gold); }
+        .btn-secondary:hover { background: var(--gold); color: var(--matte-black); transform: translateY(-3px); }
+        .btn-sm { padding: 0.6rem 1.2rem; font-size: 0.85rem; }
+
+        .section { padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-label { color: var(--gold); font-weight: 700; font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; color: var(--text-primary); margin-bottom: 0.75rem; }
+        .section-desc { color: var(--text-muted); max-width: 500px; margin: 0 auto; }
+
+        .search-filter-bar { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: center; margin-bottom: 2.5rem; }
+        .search-box { position: relative; flex: 1; min-width: 250px; max-width: 400px; }
+        .search-box input { width: 100%; padding: 1rem 1.25rem 1rem 3rem; border-radius: var(--radius-xl); border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-primary); font-family: var(--font-arabic); font-size: 0.95rem; outline: none; transition: all var(--transition-fast); }
+        .search-box input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,175,55,0.15); }
+        .search-box svg { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--text-muted); }
+        .category-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+        .category-pill { padding: 0.6rem 1.2rem; border-radius: var(--radius-xl); border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-secondary); font-family: var(--font-arabic); font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all var(--transition-fast); display: flex; align-items: center; gap: 0.4rem; white-space: nowrap; }
+        .category-pill:hover { border-color: var(--gold); color: var(--gold); }
+        .category-pill.active { background: var(--gold); color: var(--matte-black); border-color: var(--gold); box-shadow: var(--shadow-gold); }
+
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+        .card { background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-color); transition: all var(--transition-normal); position: relative; }
+        .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-medium); border-color: rgba(212,175,55,0.3); }
+        .card-image { width: 100%; height: 200px; object-fit: cover; transition: transform var(--transition-slow); }
+        .card:hover .card-image { transform: scale(1.05); }
+        .card-image-wrapper { overflow: hidden; position: relative; }
+        .card-badge { position: absolute; top: 1rem; right: 1rem; background: var(--gold); color: var(--matte-black); padding: 0.3rem 0.8rem; border-radius: var(--radius-xl); font-size: 0.75rem; font-weight: 700; z-index: 2; }
+        .card-content { padding: 1.25rem; }
+        .card-title { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.4rem; }
+        .card-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .card-footer { display: flex; align-items: center; justify-content: space-between; }
+        .card-price { font-size: 1.25rem; font-weight: 800; color: var(--gold); }
+        .card-price span { font-size: 0.8rem; font-weight: 400; color: var(--text-muted); }
+        .add-to-cart-btn { width: 40px; height: 40px; border-radius: 50%; background: var(--gold); color: var(--matte-black); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: all var(--transition-fast); }
+        .add-to-cart-btn:hover { background: var(--gold-light); transform: scale(1.1); }
+
+        .offers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .offer-card { background: var(--bg-card); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border-color); display: flex; flex-direction: column; transition: all var(--transition-normal); }
+        .offer-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-medium); }
+        .offer-image { width: 100%; height: 180px; object-fit: cover; }
+        .offer-content { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+        .offer-title { font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .offer-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem; flex: 1; }
+        .offer-prices { display: flex; align-items: center; gap: 1rem; }
+        .offer-old-price { text-decoration: line-through; color: var(--text-muted); font-size: 0.9rem; }
+        .offer-new-price { font-size: 1.4rem; font-weight: 800; color: var(--gold); }
+
+        .special-card { background: linear-gradient(135deg, var(--dark-brown) 0%, var(--matte-black) 100%); border-radius: var(--radius-xl); padding: 2.5rem; display: flex; flex-wrap: wrap; gap: 2rem; align-items: center; border: 1px solid rgba(212,175,55,0.2); position: relative; overflow: hidden; }
+        .special-card::before { content: ''; position: absolute; top: -50%; right: -20%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%); pointer-events: none; }
+        .special-image { width: 250px; height: 250px; object-fit: cover; border-radius: var(--radius-lg); border: 3px solid var(--gold); position: relative; z-index: 1; }
+        .special-content { flex: 1; min-width: 250px; position: relative; z-index: 1; }
+        .special-label { color: var(--gold); font-weight: 700; font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 0.5rem; }
+        .special-title { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: var(--white); margin-bottom: 0.75rem; }
+        .special-desc { color: rgba(255,255,255,0.7); margin-bottom: 1.5rem; }
+        .special-price { font-size: 1.8rem; font-weight: 800; color: var(--gold); }
+
+        .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); z-index: 2000; opacity: 0; visibility: hidden; transition: all var(--transition-normal); }
+        .cart-overlay.active { opacity: 1; visibility: visible; }
+        .cart-sidebar { position: fixed; top: 0; right: -100%; width: 100%; max-width: 420px; height: 100vh; background: var(--bg-primary); z-index: 2001; transition: right var(--transition-normal); display: flex; flex-direction: column; border-left: 1px solid var(--border-color); }
+        .cart-sidebar.active { right: 0; }
+        .cart-header { padding: 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; }
+        .cart-title { font-size: 1.3rem; font-weight: 700; color: var(--text-primary); }
+        .cart-close { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border-color); background: transparent; color: var(--text-primary); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: all var(--transition-fast); }
+        .cart-close:hover { background: var(--gold); color: var(--matte-black); border-color: var(--gold); }
+        .cart-items { flex: 1; overflow-y: auto; padding: 1rem 1.5rem; }
+        .cart-empty { text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
+        .cart-item { display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border-color); }
+        .cart-item-image { width: 70px; height: 70px; object-fit: cover; border-radius: var(--radius-sm); }
+        .cart-item-details { flex: 1; }
+        .cart-item-name { font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem; font-size: 0.95rem; }
+        .cart-item-price { color: var(--gold); font-weight: 700; font-size: 0.9rem; }
+        .cart-item-actions { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; }
+        .qty-btn { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--border-color); background: transparent; color: var(--text-primary); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: all var(--transition-fast); }
+        .qty-btn:hover { background: var(--gold); color: var(--matte-black); border-color: var(--gold); }
+        .cart-item-qty { font-weight: 700; min-width: 24px; text-align: center; }
+        .cart-item-delete { margin-right: auto; background: transparent; border: none; color: #e74c3c; cursor: pointer; font-size: 0.85rem; transition: color var(--transition-fast); }
+        .cart-item-delete:hover { color: #c0392b; }
+        .cart-footer { padding: 1.5rem; border-top: 1px solid var(--border-color); background: var(--bg-secondary); }
+        .cart-total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .cart-total-label { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); }
+        .cart-total-value { font-size: 1.4rem; font-weight: 800; color: var(--gold); }
+        .cart-checkout-btn { width: 100%; }
+
+        .floating-cart { position: fixed; bottom: 2rem; left: 2rem; width: 60px; height: 60px; background: var(--gold); color: var(--matte-black); border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: var(--shadow-gold); z-index: 999; transition: all var(--transition-normal); }
+        .floating-cart:hover { transform: scale(1.1) translateY(-3px); }
+        .floating-cart-count { position: absolute; top: -4px; right: -4px; background: #e74c3c; color: white; font-size: 0.75rem; font-weight: 700; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+
+        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(8px); z-index: 3000; display: flex; align-items: center; justify-content: center; padding: 1rem; opacity: 0; visibility: hidden; transition: all var(--transition-normal); }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal { background: var(--bg-primary); border-radius: var(--radius-xl); width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; border: 1px solid var(--border-color); transform: scale(0.9) translateY(20px); transition: transform var(--transition-normal); }
+        .modal-overlay.active .modal { transform: scale(1) translateY(0); }
+        .modal-header { padding: 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; }
+        .modal-title { font-size: 1.3rem; font-weight: 700; color: var(--text-primary); }
+        .modal-body { padding: 1.5rem; }
+        .form-group { margin-bottom: 1.25rem; }
+        .form-label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-primary); font-size: 0.9rem; }
+        .form-label .required { color: #e74c3c; }
+        .form-input, .form-textarea { width: 100%; padding: 0.9rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-primary); font-family: var(--font-arabic); font-size: 0.95rem; outline: none; transition: all var(--transition-fast); }
+        .form-input:focus, .form-textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,175,55,0.15); }
+        .form-textarea { min-height: 100px; resize: vertical; }
+        .order-summary { background: var(--bg-secondary); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.5rem; }
+        .order-summary-title { font-weight: 700; margin-bottom: 0.75rem; color: var(--text-primary); }
+        .order-summary-item { display: flex; justify-content: space-between; padding: 0.4rem 0; font-size: 0.9rem; color: var(--text-secondary); }
+        .order-summary-total { display: flex; justify-content: space-between; padding-top: 0.75rem; margin-top: 0.5rem; border-top: 1px solid var(--border-color); font-weight: 700; font-size: 1.1rem; }
+        .order-summary-total span:last-child { color: var(--gold); }
+
+        .footer { background: var(--matte-black); border-top: 1px solid rgba(212,175,55,0.15); padding: 4rem 1.5rem 2rem; }
+        [data-theme="light"] .footer { background: var(--dark-brown); }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2.5rem; margin-bottom: 2.5rem; }
+        .footer-brand { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+        .footer-brand-icon { width: 50px; height: 50px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--matte-black); }
+        .footer-brand-name { font-family: var(--font-display); font-size: 1.3rem; font-weight: 800; color: var(--white); }
+        .footer-desc { color: rgba(255,255,255,0.6); font-size: 0.9rem; line-height: 1.7; }
+        .footer-title { font-size: 1.1rem; font-weight: 700; color: var(--gold); margin-bottom: 1.25rem; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+        .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; transition: color var(--transition-fast); display: flex; align-items: center; gap: 0.5rem; }
+        .footer-links a:hover { color: var(--gold); }
+        .footer-hours { color: rgba(255,255,255,0.7); font-size: 0.9rem; }
+        .footer-hours-item { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .social-links { display: flex; gap: 0.75rem; margin-top: 1rem; }
+        .social-link { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; color: var(--white); text-decoration: none; font-size: 1rem; transition: all var(--transition-fast); }
+        .social-link:hover { background: var(--gold); color: var(--matte-black); border-color: var(--gold); transform: translateY(-3px); }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; color: rgba(255,255,255,0.4); font-size: 0.85rem; }
+
+        .floating-whatsapp { position: fixed; bottom: 2rem; right: 2rem; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.4); z-index: 999; transition: all var(--transition-normal); animation: pulse-whatsapp 2s ease-in-out infinite; }
+        .floating-whatsapp:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(37,211,102,0.5); }
+        @keyframes pulse-whatsapp { 0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); } 50% { box-shadow: 0 4px 30px rgba(37,211,102,0.6); } }
+
+        .back-to-top { position: fixed; bottom: 6rem; left: 2rem; width: 45px; height: 45px; background: var(--gold); color: var(--matte-black); border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; z-index: 998; opacity: 0; visibility: hidden; transition: all var(--transition-normal); box-shadow: var(--shadow-gold); }
+        .back-to-top.visible { opacity: 1; visibility: visible; }
+        .back-to-top:hover { transform: translateY(-3px); }
+
+        .toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--dark-brown); color: var(--white); padding: 1rem 2rem; border-radius: var(--radius-xl); border: 1px solid var(--gold); z-index: 5000; font-weight: 600; opacity: 0; transition: all var(--transition-normal); display: flex; align-items: center; gap: 0.75rem; white-space: nowrap; }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        .mobile-menu { position: fixed; top: 0; right: -100%; width: 80%; max-width: 300px; height: 100vh; background: var(--bg-primary); z-index: 1500; transition: right var(--transition-normal); padding: 2rem 1.5rem; border-left: 1px solid var(--border-color); }
+        .mobile-menu.active { right: 0; }
+        .mobile-menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        .mobile-menu-links { list-style: none; }
+        .mobile-menu-links li { margin-bottom: 0.5rem; }
+        .mobile-menu-links a { display: block; padding: 0.75rem 0; color: var(--text-primary); text-decoration: none; font-weight: 600; font-size: 1.1rem; border-bottom: 1px solid var(--border-color); transition: color var(--transition-fast); }
+        .mobile-menu-links a:hover { color: var(--gold); }
+
+        @media (max-width: 768px) {
+            .navbar-links { display: none; }
+            .mobile-menu-btn { display: flex; }
+            .hero-info { flex-direction: column; align-items: stretch; }
+            .hero-info-item { justify-content: center; }
+            .hero-cta { flex-direction: column; }
+            .btn { width: 100%; }
+            .special-card { flex-direction: column; text-align: center; }
+            .special-image { width: 200px; height: 200px; margin: 0 auto; }
+            .floating-cart, .floating-whatsapp { width: 50px; height: 50px; font-size: 1.2rem; }
+            .floating-cart { bottom: 1.5rem; left: 1.5rem; }
+            .floating-whatsapp { bottom: 1.5rem; right: 1.5rem; }
+            .back-to-top { bottom: 5rem; left: 1.5rem; }
+            .cards-grid { grid-template-columns: 1fr; }
+            .search-filter-bar { flex-direction: column; }
+            .search-box { max-width: 100%; width: 100%; }
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+        ::selection { background: rgba(212,175,55,0.3); color: var(--text-primary); }
+    </style>
+</head>
+<body data-theme="dark">
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">☕</div>
+        <div class="loading-text" data-ar="كافيه أولاد الأكابر" data-en="Awlad El Akaber Cafe">كافيه أولاد الأكابر</div>
+        <div class="loading-bar"><div class="loading-bar-inner"></div></div>
+    </div>
+
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo">
+                <div class="navbar-logo-icon">☕</div>
+                <span data-ar="أولاد الأكابر" data-en="El Akaber">أولاد الأكابر</span>
+            </a>
+            <ul class="navbar-links">
+                <li><a href="#home" class="active" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+                <li><a href="#menu" data-ar="المنيو" data-en="Menu">المنيو</a></li>
+                <li><a href="#offers" data-ar="العروض" data-en="Offers">العروض</a></li>
+                <li><a href="#special" data-ar="مميز اليوم" data-en="Today's Special">مميز اليوم</a></li>
+                <li><a href="#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a></li>
+            </ul>
+            <div class="navbar-actions">
+                <button class="nav-btn" id="langToggle" title="Switch Language"><span id="langIcon">🇬🇧</span></button>
+                <button class="nav-btn" id="themeToggle" title="Toggle Theme"><span id="themeIcon">🌙</span></button>
+                <button class="nav-btn cart-btn" id="cartToggleBtn" title="Cart">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                    <span class="cart-count" id="navCartCount" style="display:none">0</span>
+                </button>
+                <button class="nav-btn mobile-menu-btn" id="mobileMenuBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span style="font-weight:800;color:var(--gold);font-size:1.2rem;" data-ar="القائمة" data-en="Menu">القائمة</span>
+            <button class="cart-close" id="closeMobileMenu">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+            <li><a href="#menu" data-ar="المنيو" data-en="Menu">المنيو</a></li>
+            <li><a href="#offers" data-ar="العروض" data-en="Offers">العروض</a></li>
+            <li><a href="#special" data-ar="مميز اليوم" data-en="Today's Special">مميز اليوم</a></li>
+            <li><a href="#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a></li>
+        </ul>
+    </div>
+
+    <section class="hero" id="home">
+        <div class="hero-glow"></div>
+        <div class="hero-content">
+            <div class="hero-logo">☕</div>
+            <h1 class="hero-title" data-ar="كافيه <span>أولاد الأكابر</span>" data-en="<span>Awlad El Akaber</span> Cafe">كافيه <span>أولاد الأكابر</span></h1>
+            <p class="hero-subtitle" data-ar="أجود المشروبات والمأكولات في مكان واحد" data-en="The finest drinks and food in one place">أجود المشروبات والمأكولات في مكان واحد</p>
+            <div class="hero-info">
+                <div class="hero-info-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span data-ar="الحاج أحمد فتوح" data-en="El Hagg Ahmed Fetouh">الحاج أحمد فتوح</span>
+                </div>
+                <div class="hero-info-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <span data-ar="يومياً 8:00 ص → 1:00 ص" data-en="Daily 8:00 AM → 1:00 AM">يومياً 8:00 ص → 1:00 ص</span>
+                </div>
+            </div>
+            <div class="hero-cta">
+                <a href="#menu" class="btn btn-primary" data-ar="عرض المنيو" data-en="View Menu">عرض المنيو</a>
+                <a href="https://wa.me/201009711666" target="_blank" class="btn btn-secondary" data-ar="اطلب الآن" data-en="Order Now">اطلب الآن</a>
+                <a href="https://maps.app.goo.gl/poUn8CzU4cQpg3W7A?g_st=ic" target="_blank" class="btn btn-secondary btn-sm" data-ar="📍 الموقع" data-en="📍 Location">📍 الموقع</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="best-sellers">
+        <div class="section-header reveal">
+            <div class="section-label" data-ar="الأكثر مبيعاً" data-en="Best Sellers">الأكثر مبيعاً</div>
+            <h2 class="section-title" data-ar="اختيارات عملائنا المفضلة" data-en="Our Customers' Favorites">اختيارات عملائنا المفضلة</h2>
+        </div>
+        <div class="cards-grid" id="bestSellersGrid"></div>
+    </section>
+
+    <section class="section" id="menu" style="padding-top:2rem;">
+        <div class="section-header reveal">
+            <div class="section-label" data-ar="قائمة الطعام" data-en="Our Menu">قائمة الطعام</div>
+            <h2 class="section-title" data-ar="استكشف منيونا المميز" data-en="Explore Our Special Menu">استكشف منيونا المميز</h2>
+            <p class="section-desc" data-ar="اختر من تشكيلتنا الواسعة من المشروبات والمأكولات اللذيذة" data-en="Choose from our wide selection of delicious drinks and food">اختر من تشكيلتنا الواسعة من المشروبات والمأكولات اللذيذة</p>
+        </div>
+        <div class="search-filter-bar reveal">
+            <div class="search-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="searchInput" placeholder="ابحث في المنيو..." data-placeholder-ar="ابحث في المنيو..." data-placeholder-en="Search the menu...">
+            </div>
+            <div class="category-pills" id="categoryPills"></div>
+        </div>
+        <div id="menuContent"></div>
+    </section>
+
+    <section class="section" id="offers">
+        <div class="section-header reveal">
+            <div class="section-label" data-ar="عروض خاصة" data-en="Special Offers">عروض خاصة</div>
+            <h2 class="section-title" data-ar="لا تفوت عروضنا المميزة" data-en="Don't Miss Our Special Offers">لا تفوت عروضنا المميزة</h2>
+        </div>
+        <div class="offers-grid" id="offersGrid"></div>
+    </section>
+
+    <section class="section" id="special">
+        <div class="section-header reveal">
+            <div class="section-label" data-ar="مميز اليوم" data-en="Today's Special">مميز اليوم</div>
+            <h2 class="section-title" data-ar="جرب مميز اليوم" data-en="Try Today's Special">جرب مميز اليوم</h2>
+        </div>
+        <div class="special-card reveal" id="specialCard"></div>
+    </section>
+
+    <footer class="footer" id="contact">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand">
+                    <div class="footer-brand-icon">☕</div>
+                    <span class="footer-brand-name" data-ar="أولاد الأكابر" data-en="El Akaber">أولاد الأكابر</span>
+                </div>
+                <p class="footer-desc" data-ar="وجهتك المثالية للاستمتاع بأجود المشروبات والمأكولات في أجواء فاخرة ومميزة." data-en="Your perfect destination to enjoy the finest drinks and food in a luxurious atmosphere.">وجهتك المثالية للاستمتاع بأجود المشروبات والمأكولات في أجواء فاخرة ومميزة.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link" title="Facebook">f</a>
+                    <a href="#" class="social-link" title="Instagram">📷</a>
+                    <a href="#" class="social-link" title="TikTok">🎵</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-title" data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h4>
+                <ul class="footer-links">
+                    <li><a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+                    <li><a href="#menu" data-ar="المنيو" data-en="Menu">المنيو</a></li>
+                    <li><a href="#offers" data-ar="العروض" data-en="Offers">العروض</a></li>
+                    <li><a href="tel:+201009711666" data-ar="اتصل بنا" data-en="Call Us">اتصل بنا</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="footer-title" data-ar="ساعات العمل" data-en="Working Hours">ساعات العمل</h4>
+                <div class="footer-hours">
+                    <div class="footer-hours-item">
+                        <span data-ar="يومياً" data-en="Daily">يومياً</span>
+                        <span>8:00 AM - 1:00 AM</span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h4 class="footer-title" data-ar="تواصل معنا" data-en="Contact Us">تواصل معنا</h4>
+                <ul class="footer-links">
+                    <li><a href="https://maps.app.goo.gl/poUn8CzU4cQpg3W7A?g_st=ic" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-ar="الحاج أحمد فتوح" data-en="El Hagg Ahmed Fetouh">الحاج أحمد فتوح</span></a></li>
+                    <li><a href="tel:+201009711666"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span>+20 100 971 1666</span></a></li>
+                    <li><a href="https://wa.me/201009711666" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg><span>WhatsApp</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-ar="© 2026 كافيه أولاد الأكابر. جميع الحقوق محفوظة." data-en="© 2026 Awlad El Akaber Cafe. All rights reserved.">© 2026 كافيه أولاد الأكابر. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3 class="cart-title" data-ar="سلة التسوق" data-en="Shopping Cart">سلة التسوق</h3>
+            <button class="cart-close" id="closeCart">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                <p data-ar="السلة فارغة" data-en="Your cart is empty">السلة فارغة</p>
+            </div>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display:none;">
+            <div class="cart-total-row">
+                <span class="cart-total-label" data-ar="الإجمالي:" data-en="Total:">الإجمالي:</span>
+                <span class="cart-total-value" id="cartTotal">0 ج.م</span>
+            </div>
+            <button class="btn btn-primary cart-checkout-btn" id="checkoutBtn" data-ar="إتمام الطلب" data-en="Checkout">إتمام الطلب</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" data-ar="إتمام الطلب" data-en="Complete Order">إتمام الطلب</h3>
+                <button class="cart-close" id="closeCheckout">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="order-summary" id="orderSummary"></div>
+                <form id="checkoutForm">
+                    <div class="form-group">
+                        <label class="form-label"><span data-ar="الاسم الكامل" data-en="Full Name">الاسم الكامل</span> <span class="required">*</span></label>
+                        <input type="text" class="form-input" id="customerName" required data-placeholder-ar="أدخل اسمك" data-placeholder-en="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"><span data-ar="رقم الهاتف" data-en="Phone Number">رقم الهاتف</span> <span class="required">*</span></label>
+                        <input type="tel" class="form-input" id="customerPhone" required data-placeholder-ar="أدخل رقم هاتفك" data-placeholder-en="Enter your phone number">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"><span data-ar="رقم الترابيزة" data-en="Table Number">رقم الترابيزة</span> <span class="required">*</span></label>
+                        <input type="text" class="form-input" id="tableNumber" required data-placeholder-ar="أدخل رقم الترابيزة" data-placeholder-en="Enter table number">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label"><span data-ar="ملاحظات (اختياري)" data-en="Notes (Optional)">ملاحظات (اختياري)</span></label>
+                        <textarea class="form-textarea" id="orderNotes" data-placeholder-ar="أي ملاحظات خاصة بالطلب..." data-placeholder-en="Any special notes for your order..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%;" data-ar="تأكيد الطلب عبر واتساب" data-en="Confirm Order via WhatsApp">تأكيد الطلب عبر واتساب</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <button class="floating-cart" id="floatingCart">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="floating-cart-count" id="floatingCartCount" style="display:none;">0</span>
+    </button>
+
+    <a href="https://wa.me/201009711666" target="_blank" class="floating-whatsapp" title="WhatsApp">💬</a>
+    <button class="back-to-top" id="backToTop">↑</button>
+    <div class="toast" id="toast"><span id="toastText"></span></div>
+
+<script>
+// ========================
+// MENU DATA (Embedded for standalone use, can be replaced with fetch to menu.json)
+// ========================
+const menuData = {
+  "categories": [
+    {
+      "id": "hot-drinks",
+      "name": "مشروبات ساخنة",
+      "nameEn": "Hot Drinks",
+      "icon": "☕",
+      "items": [
+        {"id":"hd1","name":"قهوة تركي","nameEn":"Turkish Coffee","description":"قهوة تركية أصيلة محضرة على الطريقة التقليدية","descriptionEn":"Authentic Turkish coffee prepared traditionally","price":25,"image":"https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400","bestSeller":true},
+        {"id":"hd2","name":"إسبريسو","nameEn":"Espresso","description":"إسبريسو غني وقوي بنكهة مكثفة","descriptionEn":"Rich and strong espresso with intense flavor","price":30,"image":"https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400","bestSeller":false},
+        {"id":"hd3","name":"كابتشينو","nameEn":"Cappuccino","description":"كابتشينو كلاسيكي مع رغوة حليب ناعمة","descriptionEn":"Classic cappuccino with smooth milk foam","price":35,"image":"https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400","bestSeller":true},
+        {"id":"hd4","name":"لاتيه","nameEn":"Latte","description":"قهوة لاتيه كريمية مع حليب مخفوق","descriptionEn":"Creamy latte with steamed milk","price":35,"image":"https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400","bestSeller":false},
+        {"id":"hd5","name":"شوكولاتة ساخنة","nameEn":"Hot Chocolate","description":"شوكولاتة ساخنة غنية مع كريمة مخفوقة","descriptionEn":"Rich hot chocolate with whipped cream","price":40,"image":"https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=400","bestSeller":false},
+        {"id":"hd6","name":"شاي أخضر","nameEn":"Green Tea","description":"شاي أخضر طبيعي منعش","descriptionEn":"Refreshing natural green tea","price":20,"image":"https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?w=400","bestSeller":false}
+      ]
+    },
+    {
+      "id": "cold-drinks",
+      "name": "مشروبات باردة",
+      "nameEn": "Cold Drinks",
+      "icon": "🥤",
+      "items": [
+        {"id":"cd1","name":"آيس كوفي","nameEn":"Iced Coffee","description":"قهوة مثلجة منعشة مع حليب","descriptionEn":"Refreshing iced coffee with milk","price":35,"image":"https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=400","bestSeller":true},
+        {"id":"cd2","name":"آيس لاتيه","nameEn":"Iced Latte","description":"لاتيه مثلج كريمي ومنعش","descriptionEn":"Creamy and refreshing iced latte","price":40,"image":"https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400","bestSeller":false},
+        {"id":"cd3","name":"موكا مثلج","nameEn":"Iced Mocha","description":"موكا مثلج مع شوكولاتة وقهوة","descriptionEn":"Iced mocha with chocolate and coffee","price":45,"image":"https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=400","bestSeller":false},
+        {"id":"cd4","name":"كولا","nameEn":"Cola","description":"كولا باردة مع ثلج","descriptionEn":"Cold cola with ice","price":15,"image":"https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400","bestSeller":false}
+      ]
+    },
+    {
+      "id": "fresh-juices",
+      "name": "عصائر طازجة",
+      "nameEn": "Fresh Juices",
+      "icon": "🍹",
+      "items": [
+        {"id":"fj1","name":"عصير برتقال طازج","nameEn":"Fresh Orange Juice","description":"عصير برتقال طازج 100% طبيعي","descriptionEn":"100% natural fresh orange juice","price":30,"image":"https://images.unsplash.com/photo-1613478223719-2ab802602423?w=400","bestSeller":true},
+        {"id":"fj2","name":"عصير مانجو","nameEn":"Mango Juice","description":"عصير مانجو طازج وكريمي","descriptionEn":"Fresh and creamy mango juice","price":35,"image":"https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=400","bestSeller":true},
+        {"id":"fj3","name":"عصير فراولة","nameEn":"Strawberry Juice","description":"عصير فراولة طازج منعش","descriptionEn":"Refreshing fresh strawberry juice","price":35,"image":"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400","bestSeller":false},
+        {"id":"fj4","name":"عصير بطيخ","nameEn":"Watermelon Juice","description":"عصير بطيخ منعش ومثالي للصيف","descriptionEn":"Refreshing watermelon juice","price":25,"image":"https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400","bestSeller":false},
+        {"id":"fj5","name":"عصير ليمون ونعناع","nameEn":"Lemon Mint Juice","description":"عصير ليمون منعش مع نعناع طازج","descriptionEn":"Refreshing lemon juice with fresh mint","price":25,"image":"https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400","bestSeller":false}
+      ]
+    },
+    {
+      "id": "desserts",
+      "name": "حلويات",
+      "nameEn": "Desserts",
+      "icon": "🍰",
+      "items": [
+        {"id":"ds1","name":"تشيز كيك","nameEn":"Cheesecake","description":"تشيز كيك كريمي مع صوص التوت","descriptionEn":"Creamy cheesecake with berry sauce","price":50,"image":"https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400","bestSeller":true},
+        {"id":"ds2","name":"كيك شوكولاتة","nameEn":"Chocolate Cake","description":"كيك شوكولاتة غني مع طبقات كريمة","descriptionEn":"Rich chocolate cake with cream layers","price":45,"image":"https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400","bestSeller":true},
+        {"id":"ds3","name":"كريم كراميل","nameEn":"Creme Caramel","description":"كريم كراميل كلاسيكي ناعم","descriptionEn":"Classic smooth creme caramel","price":35,"image":"https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?w=400","bestSeller":false},
+        {"id":"ds4","name":"بسبوسة","nameEn":"Basbousa","description":"بسبوسة شرقية تقليدية بالمكسرات","descriptionEn":"Traditional oriental basbousa with nuts","price":30,"image":"https://images.unsplash.com/photo-1519915028121-7d3463d20b13?w=400","bestSeller":false}
+      ]
+    },
+    {
+      "id": "fast-food",
+      "name": "وجبات سريعة",
+      "nameEn": "Fast Food",
+      "icon": "🍕",
+      "items": [
+        {"id":"ff1","name":"بيتزا مارجريتا","nameEn":"Margherita Pizza","description":"بيتزا مارجريتا كلاسيكية بالجبن والريحان","descriptionEn":"Classic Margherita pizza with cheese and basil","price":75,"image":"https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400","bestSeller":true},
+        {"id":"ff2","name":"برجر لحم","nameEn":"Beef Burger","description":"برجر لحم شهي مع جبن وخضروات","descriptionEn":"Delicious beef burger with cheese and vegetables","price":65,"image":"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400","bestSeller":true},
+        {"id":"ff3","name":"ساندويتش دجاج مشوي","nameEn":"Grilled Chicken Sandwich","description":"ساندويتش دجاج مشوي مع صوص خاص","descriptionEn":"Grilled chicken sandwich with special sauce","price":55,"image":"https://images.unsplash.com/photo-1521390188846-e2a3a97453a0?w=400","bestSeller":false},
+        {"id":"ff4","name":"باستا ألفريدو","nameEn":"Alfredo Pasta","description":"باستا كريمية مع صوص ألفريدو والدجاج","descriptionEn":"Creamy pasta with Alfredo sauce and chicken","price":70,"image":"https://images.unsplash.com/photo-1645112411341-6c4fd023714a?w=400","bestSeller":false}
+      ]
+    },
+    {
+      "id": "snacks",
+      "name": "سناكس",
+      "nameEn": "Snacks",
+      "icon": "🍟",
+      "items": [
+        {"id":"sn1","name":"بطاطس مقلية","nameEn":"French Fries","description":"بطاطس مقلية مقرمشة مع صوصات متنوعة","descriptionEn":"Crispy french fries with assorted sauces","price":25,"image":"https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400","bestSeller":false},
+        {"id":"sn2","name":"أصابع موزاريلا","nameEn":"Mozzarella Sticks","description":"أصابع موزاريلا مقلية مع صوص الطماطم","descriptionEn":"Fried mozzarella sticks with tomato sauce","price":40,"image":"https://images.unsplash.com/photo-1548340748-6d2f2f23fb7d?w=400","bestSeller":false},
+        {"id":"sn3","name":"أجنحة دجاج","nameEn":"Chicken Wings","description":"أجنحة دجاج مقلية حارة ولذيذة","descriptionEn":"Spicy and delicious fried chicken wings","price":50,"image":"https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=400","bestSeller":true},
+        {"id":"sn4","name":"ناجتس دجاج","nameEn":"Chicken Nuggets","description":"ناجتس دجاج مقرمشة مع صوص الباربيكيو","descriptionEn":"Crispy chicken nuggets with BBQ sauce","price":35,"image":"https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400","bestSeller":false}
+      ]
+    },
+    {
+      "id": "milkshakes",
+      "name": "ميلك شيك",
+      "nameEn": "Milkshakes",
+      "icon": "🧋",
+      "items": [
+        {"id":"ms1","name":"ميلك شيك فانيليا","nameEn":"Vanilla Milkshake","description":"ميلك شيك فانيليا كريمي مع كريمة مخفوقة","descriptionEn":"Creamy vanilla milkshake with whipped cream","price":40,"image":"https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400","bestSeller":false},
+        {"id":"ms2","name":"ميلك شيك شوكولاتة","nameEn":"Chocolate Milkshake","description":"ميلك شيك شوكولاتة غني مع رقائق الشوكولاتة","descriptionEn":"Rich chocolate milkshake with chocolate chips","price":45,"image":"https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=400","bestSeller":true},
+        {"id":"ms3","name":"ميلك شيك فراولة","nameEn":"Strawberry Milkshake","description":"ميلك شيك فراولة منعش مع فواكه طازجة","descriptionEn":"Refreshing strawberry milkshake with fresh fruits","price":45,"image":"https://images.unsplash.com/photo-1579954115563-e72bf1381629?w=400","bestSeller":false},
+        {"id":"ms4","name":"ميلك شيك أوريو","nameEn":"Oreo Milkshake","description":"ميلك شيك أوريو مع بسكويت أوريو مطحون","descriptionEn":"Oreo milkshake with crushed Oreo cookies","price":50,"image":"https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400","bestSeller":true}
+      ]
+    },
+    {
+      "id": "ice-cream",
+      "name": "آيس كريم",
+      "nameEn": "Ice Cream",
+      "icon": "🍨",
+      "items": [
+        {"id":"ic1","name":"آيس كريم فانيليا","nameEn":"Vanilla Ice Cream","description":"آيس كريم فانيليا كلاسيكي كريمي","descriptionEn":"Classic creamy vanilla ice cream","price":25,"image":"https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=400","bestSeller":false},
+        {"id":"ic2","name":"آيس كريم شوكولاتة","nameEn":"Chocolate Ice Cream","description":"آيس كريم شوكولاتة غني وكريمي","descriptionEn":"Rich and creamy chocolate ice cream","price":30,"image":"https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400","bestSeller":true},
+        {"id":"ic3","name":"سنداي فراولة","nameEn":"Strawberry Sundae","description":"سنداي فراولة مع صوص الفراولة والمكسرات","descriptionEn":"Strawberry sundae with strawberry sauce and nuts","price":40,"image":"https://images.unsplash.com/photo-1560008581-09826d1de69e?w=400","bestSeller":false},
+        {"id":"ic4","name":"آيس كريم مكس","nameEn":"Mixed Ice Cream","description":"ثلاث نكهات مختلطة من آيس كريم الكريمة","descriptionEn":"Three mixed flavors of cream ice cream","price":35,"image":"https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=400","bestSeller":false}
+      ]
+    }
+  ],
+  "offers": [
+    {"id":"off1","title":"عرض الإفطار","titleEn":"Breakfast Offer","description":"قهوة تركي + بسبوسة بـ 45 جنيه فقط","descriptionEn":"Turkish coffee + Basbousa for only 45 EGP","image":"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400","oldPrice":55,"newPrice":45},
+    {"id":"off2","title":"عرض العائلة","titleEn":"Family Offer","description":"بيتزا مارجريتا + 2 عصير برتقال بـ 120 جنيه","descriptionEn":"Margherita pizza + 2 orange juices for 120 EGP","image":"https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400","oldPrice":135,"newPrice":120}
+  ],
+  "todaysSpecial": {"id":"ts1","name":"موكا مثلج","nameEn":"Iced Mocha","description":"موكا مثلج مميز مع نكهة الشوكولاتة البلجيكية","descriptionEn":"Special iced mocha with Belgian chocolate flavor","price":45,"image":"https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=400"}
+};
+
+// ========================
+// STATE
+// ========================
+let currentLang = 'ar';
+let currentTheme = 'dark';
+let cart = [];
+let activeCategory = 'all';
+let searchQuery = '';
+
+// ========================
+// DOM ELEMENTS
+// ========================
+const els = {
+  loadingScreen: document.getElementById('loadingScreen'),
+  navbar: document.getElementById('navbar'),
+  langToggle: document.getElementById('langToggle'),
+  langIcon: document.getElementById('langIcon'),
+  themeToggle: document.getElementById('themeToggle'),
+  themeIcon: document.getElementById('themeIcon'),
+  mobileMenuBtn: document.getElementById('mobileMenuBtn'),
+  mobileMenu: document.getElementById('mobileMenu'),
+  closeMobileMenu: document.getElementById('closeMobileMenu'),
+  cartToggleBtn: document.getElementById('cartToggleBtn'),
+  cartOverlay: document.getElementById('cartOverlay'),
+  cartSidebar: document.getElementById('cartSidebar'),
+  closeCart: document.getElementById('closeCart'),
+  floatingCart: document.getElementById('floatingCart'),
+  cartItems: document.getElementById('cartItems'),
+  cartFooter: document.getElementById('cartFooter'),
+  cartTotal: document.getElementById('cartTotal'),
+  navCartCount: document.getElementById('navCartCount'),
+  floatingCartCount: document.getElementById('floatingCartCount'),
+  checkoutBtn: document.getElementById('checkoutBtn'),
+  checkoutModal: document.getElementById('checkoutModal'),
+  closeCheckout: document.getElementById('closeCheckout'),
+  checkoutForm: document.getElementById('checkoutForm'),
+  orderSummary: document.getElementById('orderSummary'),
+  searchInput: document.getElementById('searchInput'),
+  categoryPills: document.getElementById('categoryPills'),
+  menuContent: document.getElementById('menuContent'),
+  bestSellersGrid: document.getElementById('bestSellersGrid'),
+  offersGrid: document.getElementById('offersGrid'),
+  specialCard: document.getElementById('specialCard'),
+  backToTop: document.getElementById('backToTop'),
+  toast: document.getElementById('toast'),
+  toastText: document.getElementById('toastText'),
+};
+
+// ========================
+// UTILITIES
+// ========================
+function t(ar, en) { return currentLang === 'ar' ? ar : en; }
+
+function formatPrice(price) {
+  return currentLang === 'ar' ? price + ' ج.م' : price + ' EGP';
+}
+
+function showToast(message) {
+  els.toastText.textContent = message;
+  els.toast.classList.add('show');
+  setTimeout(() => els.toast.classList.remove('show'), 2500);
+}
+
+function getItemById(id) {
+  for (const cat of menuData.categories) {
+    const item = cat.items.find(i => i.id === id);
+    if (item) return { ...item, category: cat };
+  }
+  return null;
+}
+
+// ========================
+// RENDER FUNCTIONS
+// ========================
+function renderCard(item, cat) {
+  const name = currentLang === 'ar' ? item.name : item.nameEn;
+  const desc = currentLang === 'ar' ? item.description : item.descriptionEn;
+  const badgeText = currentLang === 'ar' ? 'الأكثر مبيعاً' : 'Best Seller';
+  return `
+    <div class="card reveal">
+      <div class="card-image-wrapper">
+        <img src="${item.image}" alt="${name}" class="card-image" loading="lazy">
+        ${item.bestSeller ? `<span class="card-badge">${badgeText}</span>` : ''}
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">${name}</h3>
+        <p class="card-desc">${desc}</p>
+        <div class="card-footer">
+          <span class="card-price">${formatPrice(item.price)}</span>
+          <button class="add-to-cart-btn" onclick="addToCart('${item.id}')" title="${t('أضف للسلة','Add to Cart')}">+</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderBestSellers() {
+  const bestSellers = [];
+  menuData.categories.forEach(cat => {
+    cat.items.forEach(item => {
+      if (item.bestSeller) bestSellers.push({ ...item, category: cat });
+    });
+  });
+  els.bestSellersGrid.innerHTML = bestSellers.map(item => renderCard(item, item.category)).join('');
+}
+
+function renderCategoryPills() {
+  const allLabel = t('الكل', 'All');
+  let html = `<button class="category-pill ${activeCategory === 'all' ? 'active' : ''}" onclick="setCategory('all')">${allLabel}</button>`;
+  menuData.categories.forEach(cat => {
+    const name = currentLang === 'ar' ? cat.name : cat.nameEn;
+    html += `<button class="category-pill ${activeCategory === cat.id ? 'active' : ''}" onclick="setCategory('${cat.id}')">${cat.icon} ${name}</button>`;
+  });
+  els.categoryPills.innerHTML = html;
+}
+
+function renderMenu() {
+  let html = '';
+  const categoriesToRender = activeCategory === 'all' ? menuData.categories : menuData.categories.filter(c => c.id === activeCategory);
+
+  categoriesToRender.forEach(cat => {
+    const catName = currentLang === 'ar' ? cat.name : cat.nameEn;
+    const filteredItems = cat.items.filter(item => {
+      const name = currentLang === 'ar' ? item.name : item.nameEn;
+      const desc = currentLang === 'ar' ? item.description : item.descriptionEn;
+      const q = searchQuery.toLowerCase();
+      return name.toLowerCase().includes(q) || desc.toLowerCase().includes(q);
+    });
+
+    if (filteredItems.length === 0) return;
+
+    html += `
+      <div class="reveal" style="margin-bottom:3rem;">
+        <h3 style="font-size:1.5rem;font-weight:800;margin-bottom:1.5rem;color:var(--text-primary);display:flex;align-items:center;gap:0.5rem;">
+          <span style="color:var(--gold);">${cat.icon}</span> ${catName}
+        </h3>
+        <div class="cards-grid">
+          ${filteredItems.map(item => renderCard(item, cat)).join('')}
+        </div>
+      </div>
+    `;
+  });
+
+  if (html === '') {
+    html = `<div class="reveal" style="text-align:center;padding:3rem;color:var(--text-muted);"><p style="font-size:1.2rem;">${t('لا توجد نتائج مطابقة للبحث','No matching results found')}</p></div>`;
+  }
+
+  els.menuContent.innerHTML = html;
+  initScrollReveal();
+}
+
+function renderOffers() {
+  els.offersGrid.innerHTML = menuData.offers.map(offer => {
+    const title = currentLang === 'ar' ? offer.title : offer.titleEn;
+    const desc = currentLang === 'ar' ? offer.description : offer.descriptionEn;
+    return `
+      <div class="offer-card reveal">
+        <img src="${offer.image}" alt="${title}" class="offer-image" loading="lazy">
+        <div class="offer-content">
+          <h3 class="offer-title">${title}</h3>
+          <p class="offer-desc">${desc}</p>
+          <div class="offer-prices">
+            <span class="offer-old-price">${formatPrice(offer.oldPrice)}</span>
+            <span class="offer-new-price">${formatPrice(offer.newPrice)}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderSpecial() {
+  const s = menuData.todaysSpecial;
+  const name = currentLang === 'ar' ? s.name : s.nameEn;
+  const desc = currentLang === 'ar' ? s.description : s.descriptionEn;
+  const btnText = t('أضف للسلة', 'Add to Cart');
+  els.specialCard.innerHTML = `
+    <img src="${s.image}" alt="${name}" class="special-image">
+    <div class="special-content">
+      <div class="special-label">${t('مميز اليوم', "Today's Special")}</div>
+      <h3 class="special-title">${name}</h3>
+      <p class="special-desc">${desc}</p>
+      <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
+        <span class="special-price">${formatPrice(s.price)}</span>
+        <button class="btn btn-primary" onclick="addToCart('${s.id}')">${btnText}</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderCart() {
+  if (cart.length === 0) {
+    els.cartItems.innerHTML = `
+      <div class="cart-empty">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:60px;height:60px;margin-bottom:1rem;opacity:0.3;"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <p>${t('السلة فارغة', 'Your cart is empty')}</p>
+      </div>
+    `;
+    els.cartFooter.style.display = 'none';
+    els.navCartCount.style.display = 'none';
+    els.floatingCartCount.style.display = 'none';
+    return;
+  }
+
+  let total = 0;
+  let count = 0;
+  let html = '';
+
+  cart.forEach(cartItem => {
+    const item = getItemById(cartItem.id);
+    if (!item) return;
+    const name = currentLang === 'ar' ? item.name : item.nameEn;
+    const itemTotal = item.price * cartItem.qty;
+    total += itemTotal;
+    count += cartItem.qty;
+    html += `
+      <div class="cart-item">
+        <img src="${item.image}" alt="${name}" class="cart-item-image">
+        <div class="cart-item-details">
+          <div class="cart-item-name">${name}</div>
+          <div class="cart-item-price">${formatPrice(itemTotal)}</div>
+          <div class="cart-item-actions">
+            <button class="qty-btn" onclick="updateQty('${cartItem.id}', -1)">−</button>
+            <span class="cart-item-qty">${cartItem.qty}</span>
+            <button class="qty-btn" onclick="updateQty('${cartItem.id}', 1)">+</button>
+            <button class="cart-item-delete" onclick="removeFromCart('${cartItem.id}')">${t('حذف', 'Remove')}</button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  els.cartItems.innerHTML = html;
+  els.cartTotal.textContent = formatPrice(total);
+  els.cartFooter.style.display = 'block';
+  els.navCartCount.textContent = count;
+  els.navCartCount.style.display = 'flex';
+  els.floatingCartCount.textContent = count;
+  els.floatingCartCount.style.display = 'flex';
+}
+
+function renderOrderSummary() {
+  let total = 0;
+  let html = `<div class="order-summary-title">${t('ملخص الطلب', 'Order Summary')}</div>`;
+  cart.forEach(cartItem => {
+    const item = getItemById(cartItem.id);
+    if (!item) return;
+    const name = currentLang === 'ar' ? item.name : item.nameEn;
+    const itemTotal = item.price * cartItem.qty;
+    total += itemTotal;
+    html += `<div class="order-summary-item"><span>${name} x${cartItem.qty}</span><span>${formatPrice(itemTotal)}</span></div>`;
+  });
+  html += `<div class="order-summary-total"><span>${t('الإجمالي', 'Total')}</span><span>${formatPrice(total)}</span></div>`;
+  els.orderSummary.innerHTML = html;
+}
+
+// ========================
+// CART ACTIONS
+// ========================
+function addToCart(id) {
+  const existing = cart.find(c => c.id === id);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ id, qty: 1 });
+  }
+  renderCart();
+  const item = getItemById(id);
+  const name = currentLang === 'ar' ? item.name : item.nameEn;
+  showToast(t(`تمت إضافة ${name} للسلة`, `${name} added to cart`));
+}
+
+function updateQty(id, delta) {
+  const item = cart.find(c => c.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) {
+    cart = cart.filter(c => c.id !== id);
+  }
+  renderCart();
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(c => c.id !== id);
+  renderCart();
+}
+
+// ========================
+// CATEGORY & SEARCH
+// ========================
+function setCategory(id) {
+  activeCategory = id;
+  renderCategoryPills();
+  renderMenu();
+}
+
+// ========================
+// CHECKOUT
+// ========================
+function openCheckout() {
+  if (cart.length === 0) return;
+  renderOrderSummary();
+  els.checkoutModal.classList.add('active');
+  els.cartSidebar.classList.remove('active');
+  els.cartOverlay.classList.remove('active');
+}
+
+function closeCheckoutModal() {
+  els.checkoutModal.classList.remove('active');
+}
+
+function submitOrder(e) {
+  e.preventDefault();
+  const name = document.getElementById('customerName').value.trim();
+  const phone = document.getElementById('customerPhone').value.trim();
+  const table = document.getElementById('tableNumber').value.trim();
+  const notes = document.getElementById('orderNotes').value.trim();
+
+  if (!name || !phone || !table) return;
+
+  let itemsText = '';
+  let total = 0;
+  cart.forEach(cartItem => {
+    const item = getItemById(cartItem.id);
+    if (!item) return;
+    const itemName = currentLang === 'ar' ? item.name : item.nameEn;
+    const itemTotal = item.price * cartItem.qty;
+    total += itemTotal;
+    itemsText += `- ${itemName} x${cartItem.qty} = ${itemTotal} ج.م\n`;
+  });
+
+  const message = `طلب جديد من كافيه أولاد الأكابر
+
+الاسم:
+${name}
+
+رقم الهاتف:
+${phone}
+
+رقم الترابيزة:
+${table}
+
+الطلبات:
+
+${itemsText}
+الإجمالي:
+${total} ج.م
+
+ملاحظات:
+${notes || 'لا توجد ملاحظات'}
+`;
+
+  const encodedMessage = encodeURIComponent(message);
+  window.open(`https://wa.me/201009711666?text=${encodedMessage}`, '_blank');
+
+  cart = [];
+  renderCart();
+  closeCheckoutModal();
+  showToast(t('تم إرسال طلبك بنجاح!', 'Your order has been sent successfully!'));
+}
+
+// ========================
+// LANGUAGE
+// ========================
+function toggleLanguage() {
+  currentLang = currentLang === 'ar' ? 'en' : 'ar';
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+  els.langIcon.textContent = currentLang === 'ar' ? '🇬🇧' : '🇸🇦';
+
+  document.querySelectorAll('[data-ar]').forEach(el => {
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      const ph = el.getAttribute(currentLang === 'ar' ? 'data-placeholder-ar' : 'data-placeholder-en');
+      if (ph) el.placeholder = ph;
+    } else {
+      el.innerHTML = el.getAttribute(currentLang === 'ar' ? 'data-ar' : 'data-en');
+    }
+  });
+
+  renderCategoryPills();
+  renderMenu();
+  renderBestSellers();
+  renderOffers();
+  renderSpecial();
+  renderCart();
+  renderOrderSummary();
+}
+
+// ========================
+// THEME
+// ========================
+function toggleTheme() {
+  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+  document.body.setAttribute('data-theme', currentTheme);
+  els.themeIcon.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
+  localStorage.setItem('theme', currentTheme);
+}
+
+// ========================
+// SCROLL REVEAL
+// ========================
+function initScrollReveal() {
+  const reveals = document.querySelectorAll('.reveal:not(.active)');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+}
+
+// ========================
+// EVENT LISTENERS
+// ========================
+function initEventListeners() {
+  // Loading screen
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      els.loadingScreen.classList.add('hidden');
+    }, 1500);
+  });
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      els.navbar.classList.add('scrolled');
+    } else {
+      els.navbar.classList.remove('scrolled');
+    }
+
+    // Back to top
+    if (window.scrollY > 500) {
+      els.backToTop.classList.add('visible');
+    } else {
+      els.backToTop.classList.remove('visible');
+    }
+  });
+
+  // Language
+  els.langToggle.addEventListener('click', toggleLanguage);
+
+  // Theme
+  els.themeToggle.addEventListener('click', toggleTheme);
+
+  // Mobile menu
+  els.mobileMenuBtn.addEventListener('click', () => els.mobileMenu.classList.add('active'));
+  els.closeMobileMenu.addEventListener('click', () => els.mobileMenu.classList.remove('active'));
+
+  // Cart
+  els.cartToggleBtn.addEventListener('click', () => {
+    els.cartSidebar.classList.add('active');
+    els.cartOverlay.classList.add('active');
+  });
+  els.floatingCart.addEventListener('click', () => {
+    els.cartSidebar.classList.add('active');
+    els.cartOverlay.classList.add('active');
+  });
+  els.closeCart.addEventListener('click', () => {
+    els.cartSidebar.classList.remove('active');
+    els.cartOverlay.classList.remove('active');
+  });
+  els.cartOverlay.addEventListener('click', () => {
+    els.cartSidebar.classList.remove('active');
+    els.cartOverlay.classList.remove('active');
+  });
+
+  // Checkout
+  els.checkoutBtn.addEventListener('click', openCheckout);
+  els.closeCheckout.addEventListener('click', closeCheckoutModal);
+  els.checkoutModal.addEventListener('click', (e) => {
+    if (e.target === els.checkoutModal) closeCheckoutModal();
+  });
+  els.checkoutForm.addEventListener('submit', submitOrder);
+
+  // Search
+  els.searchInput.addEventListener('input', (e) => {
+    searchQuery = e.target.value;
+    renderMenu();
+  });
+
+  // Back to top
+  els.backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        els.mobileMenu.classList.remove('active');
+      }
+    });
+  });
+
+  // Active nav link
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 100;
+      if (window.scrollY >= sectionTop) {
+        current = section.getAttribute('id');
+      }
+    });
+    document.querySelectorAll('.navbar-links a').forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  });
+}
+
+// ========================
+// INIT
+// ========================
+function init() {
+  // Load saved theme
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    currentTheme = savedTheme;
+    document.body.setAttribute('data-theme', currentTheme);
+    els.themeIcon.textContent = currentTheme === 'dark' ? '🌙' : '☀️';
+  }
+
+  renderCategoryPills();
+  renderMenu();
+  renderBestSellers();
+  renderOffers();
+  renderSpecial();
+  renderCart();
+  initEventListeners();
+  initScrollReveal();
+}
+
+init();
+</script>
+</body>
+</html>

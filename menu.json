@@ -1,0 +1,449 @@
+{
+  "categories": [
+    {
+      "id": "hot-drinks",
+      "name": "مشروبات ساخنة",
+      "nameEn": "Hot Drinks",
+      "icon": "☕",
+      "items": [
+        {
+          "id": "hd1",
+          "name": "قهوة تركي",
+          "nameEn": "Turkish Coffee",
+          "description": "قهوة تركية أصيلة محضرة على الطريقة التقليدية",
+          "descriptionEn": "Authentic Turkish coffee prepared in the traditional way",
+          "price": 25,
+          "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400",
+          "bestSeller": true
+        },
+        {
+          "id": "hd2",
+          "name": "إسبريسو",
+          "nameEn": "Espresso",
+          "description": "إسبريسو غني وقوي بنكهة مكثفة",
+          "descriptionEn": "Rich and strong espresso with intense flavor",
+          "price": 30,
+          "image": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400",
+          "bestSeller": false
+        },
+        {
+          "id": "hd3",
+          "name": "كابتشينو",
+          "nameEn": "Cappuccino",
+          "description": "كابتشينو كلاسيكي مع رغوة حليب ناعمة",
+          "descriptionEn": "Classic cappuccino with smooth milk foam",
+          "price": 35,
+          "image": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400",
+          "bestSeller": true
+        },
+        {
+          "id": "hd4",
+          "name": "لاتيه",
+          "nameEn": "Latte",
+          "description": "قهوة لاتيه كريمية مع حليب مخفوق",
+          "descriptionEn": "Creamy latte coffee with steamed milk",
+          "price": 35,
+          "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400",
+          "bestSeller": false
+        },
+        {
+          "id": "hd5",
+          "name": "مشروب ساخن بالشوكولاتة",
+          "nameEn": "Hot Chocolate",
+          "description": "شوكولاتة ساخنة غنية مع كريمة مخفوقة",
+          "descriptionEn": "Rich hot chocolate with whipped cream",
+          "price": 40,
+          "image": "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=400",
+          "bestSeller": false
+        },
+        {
+          "id": "hd6",
+          "name": "شاي أخضر",
+          "nameEn": "Green Tea",
+          "description": "شاي أخضر طبيعي منعش",
+          "descriptionEn": "Refreshing natural green tea",
+          "price": 20,
+          "image": "https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?w=400",
+          "bestSeller": false
+        }
+      ]
+    },
+    {
+      "id": "cold-drinks",
+      "name": "مشروبات باردة",
+      "nameEn": "Cold Drinks",
+      "icon": "🥤",
+      "items": [
+        {
+          "id": "cd1",
+          "name": "آيس كوفي",
+          "nameEn": "Iced Coffee",
+          "description": "قهوة مثلجة منعشة مع حليب",
+          "descriptionEn": "Refreshing iced coffee with milk",
+          "price": 35,
+          "image": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=400",
+          "bestSeller": true
+        },
+        {
+          "id": "cd2",
+          "name": "آيس لاتيه",
+          "nameEn": "Iced Latte",
+          "description": "لاتيه مثلج كريمي ومنعش",
+          "descriptionEn": "Creamy and refreshing iced latte",
+          "price": 40,
+          "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400",
+          "bestSeller": false
+        },
+        {
+          "id": "cd3",
+          "name": "موكا مثلج",
+          "nameEn": "Iced Mocha",
+          "description": "موكا مثلج مع شوكولاتة وقهوة",
+          "descriptionEn": "Iced mocha with chocolate and coffee",
+          "price": 45,
+          "image": "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=400",
+          "bestSeller": false
+        },
+        {
+          "id": "cd4",
+          "name": "كولا",
+          "nameEn": "Cola",
+          "description": "كولا باردة مع ثلج",
+          "descriptionEn": "Cold cola with ice",
+          "price": 15,
+          "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400",
+          "bestSeller": false
+        }
+      ]
+    },
+    {
+      "id": "fresh-juices",
+      "name": "عصائر طازجة",
+      "nameEn": "Fresh Juices",
+      "icon": "🍹",
+      "items": [
+        {
+          "id": "fj1",
+          "name": "عصير برتقال طازج",
+          "nameEn": "Fresh Orange Juice",
+          "description": "عصير برتقال طازج 100% طبيعي",
+          "descriptionEn": "100% natural fresh orange juice",
+          "price": 30,
+          "image": "https://images.unsplash.com/photo-1613478223719-2ab802602423?w=400",
+          "bestSeller": true
+        },
+        {
+          "id": "fj2",
+          "name": "عصير مانجو",
+          "nameEn": "Mango Juice",
+          "description": "عصير مانجو طازج وكريمي",
+          "descriptionEn": "Fresh and creamy mango juice",
+          "price": 35,
+          "image": "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=400",
+          "bestSeller": true
+        },
+        {
+          "id": "fj3",
+          "name": "عصير فراولة",
+          "nameEn": "Strawberry Juice",
+          "description": "عصير فراولة طازج منعش",
+          "descriptionEn": "Refreshing fresh strawberry juice",
+          "price": 35,
+          "image": "https://images.unsplash.com/photo-1568909344668-6f14a07b56a0?w=400",
+          "bestSeller": false
+        },
+        {
+          "id": "fj4",
+          "name": "عصير بطيخ",
+          "nameEn": "Watermelon Juice",
+          "description": "عصير بطيخ منعش ومثالي للصيف",
+          "descriptionEn": "Refreshing watermelon juice perfect for summer",
+          "price": 25,
+          "image": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400",
+          "bestSeller": false
+        },
+        {
+          "id": "fj5",
+          "name": "عصير ليمون ونعناع",
+          "nameEn": "Lemon Mint Juice",
+          "description": "عصير ليمون منعش مع نعناع طازج",
+          "descriptionEn": "Refreshing lemon juice with fresh mint",
+          "price": 25,
+          "image": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400",
+          "bestSeller": false
+        }
+      ]
+    },
+    {
+      "id": "desserts",
+      "name": "حلويات",
+      "nameEn": "Desserts",
+      "icon": "🍰",
+      "items": [
+        {
+          "id": "ds1",
+          "name": "تشيز كيك",
+          "nameEn": "Cheesecake",
+          "description": "تشيز كيك كريمي مع صوص التوت",
+          "descriptionEn": "Creamy cheesecake with berry sauce",
+          "price": 50,
+          "image": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400",
+          "bestSeller": true
+        },
+        {
+          "id": "ds2",
+          "name": "كيك شوكولاتة",
+          "nameEn": "Chocolate Cake",
+          "description": "كيك شوكولاتة غني مع طبقات كريمة",
+          "descriptionEn": "Rich chocolate cake with cream layers",
+          "price": 45,
+          "image": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400",
+          "bestSeller": true
+        },
+        {
+          "id": "ds3",
+          "name": "كريم كراميل",
+          "nameEn": "Creme Caramel",
+          "description": "كريم كراميل كلاسيكي ناعم",
+          "descriptionEn": "Classic smooth creme caramel",
+          "price": 35,
+          "image": "https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?w=400",
+          "bestSeller": false
+        },
+        {
+          "id": "ds4",
+          "name": "بسبوسة",
+          "nameEn": "Basbousa",
+          "description": "بسبوسة شرقية تقليدية بالمكسرات",
+          "descriptionEn": "Traditional oriental basbousa with nuts",
+          "price": 30,
+          "image": "https://images.unsplash.com/photo-1519915028121-7d3463d20b13?w=400",
+          "bestSeller": false
+        }
+      ]
+    },
+    {
+      "id": "fast-food",
+      "name": "وجبات سريعة",
+      "nameEn": "Fast Food",
+      "icon": "🍕",
+      "items": [
+        {
+          "id": "ff1",
+          "name": "بيتزا مارجريتا",
+          "nameEn": "Margherita Pizza",
+          "description": "بيتزا مارجريتا كلاسيكية بالجبن والريحان",
+          "descriptionEn": "Classic Margherita pizza with cheese and basil",
+          "price": 75,
+          "image": "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400",
+          "bestSeller": true
+        },
+        {
+          "id": "ff2",
+          "name": "برجر لحم",
+          "nameEn": "Beef Burger",
+          "description": "برجر لحم شهي مع جبن وخضروات",
+          "descriptionEn": "Delicious beef burger with cheese and vegetables",
+          "price": 65,
+          "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400",
+          "bestSeller": true
+        },
+        {
+          "id": "ff3",
+          "name": "ساندويتش دجاج مشوي",
+          "nameEn": "Grilled Chicken Sandwich",
+          "description": "ساندويتش دجاج مشوي مع صوص خاص",
+          "descriptionEn": "Grilled chicken sandwich with special sauce",
+          "price": 55,
+          "image": "https://images.unsplash.com/photo-1521390188846-e2a3a97453a0?w=400",
+          "bestSeller": false
+        },
+        {
+          "id": "ff4",
+          "name": "باستا ألفريدو",
+          "nameEn": "Alfredo Pasta",
+          "description": "باستا كريمية مع صوص ألفريدو والدجاج",
+          "descriptionEn": "Creamy pasta with Alfredo sauce and chicken",
+          "price": 70,
+          "image": "https://images.unsplash.com/photo-1645112411341-6c4fd023714a?w=400",
+          "bestSeller": false
+        }
+      ]
+    },
+    {
+      "id": "snacks",
+      "name": "سناكس",
+      "nameEn": "Snacks",
+      "icon": "🍟",
+      "items": [
+        {
+          "id": "sn1",
+          "name": "بطاطس مقلية",
+          "nameEn": "French Fries",
+          "description": "بطاطس مقلية مقرمشة مع صوصات متنوعة",
+          "descriptionEn": "Crispy french fries with assorted sauces",
+          "price": 25,
+          "image": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400",
+          "bestSeller": false
+        },
+        {
+          "id": "sn2",
+          "name": "أصابع موزاريلا",
+          "nameEn": "Mozzarella Sticks",
+          "description": "أصابع موزاريلا مقلية مع صوص الطماطم",
+          "descriptionEn": "Fried mozzarella sticks with tomato sauce",
+          "price": 40,
+          "image": "https://images.unsplash.com/photo-1548340748-6d2f2f23fb7d?w=400",
+          "bestSeller": false
+        },
+        {
+          "id": "sn3",
+          "name": "أجنحة دجاج",
+          "nameEn": "Chicken Wings",
+          "description": "أجنحة دجاج مقلية حارة ولذيذة",
+          "descriptionEn": "Spicy and delicious fried chicken wings",
+          "price": 50,
+          "image": "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=400",
+          "bestSeller": true
+        },
+        {
+          "id": "sn4",
+          "name": "ناجتس دجاج",
+          "nameEn": "Chicken Nuggets",
+          "description": "ناجتس دجاج مقرمشة مع صوص الباربيكيو",
+          "descriptionEn": "Crispy chicken nuggets with BBQ sauce",
+          "price": 35,
+          "image": "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400",
+          "bestSeller": false
+        }
+      ]
+    },
+    {
+      "id": "milkshakes",
+      "name": "ميلك شيك",
+      "nameEn": "Milkshakes",
+      "icon": "🧋",
+      "items": [
+        {
+          "id": "ms1",
+          "name": "ميلك شيك فانيليا",
+          "nameEn": "Vanilla Milkshake",
+          "description": "ميلك شيك فانيليا كريمي مع كريمة مخفوقة",
+          "descriptionEn": "Creamy vanilla milkshake with whipped cream",
+          "price": 40,
+          "image": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400",
+          "bestSeller": false
+        },
+        {
+          "id": "ms2",
+          "name": "ميلك شيك شوكولاتة",
+          "nameEn": "Chocolate Milkshake",
+          "description": "ميلك شيك شوكولاتة غني مع رقائق الشوكولاتة",
+          "descriptionEn": "Rich chocolate milkshake with chocolate chips",
+          "price": 45,
+          "image": "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=400",
+          "bestSeller": true
+        },
+        {
+          "id": "ms3",
+          "name": "ميلك شيك فراولة",
+          "nameEn": "Strawberry Milkshake",
+          "description": "ميلك شيك فراولة منعش مع فواكه طازجة",
+          "descriptionEn": "Refreshing strawberry milkshake with fresh fruits",
+          "price": 45,
+          "image": "https://images.unsplash.com/photo-1579954115563-e72bf1381629?w=400",
+          "bestSeller": false
+        },
+        {
+          "id": "ms4",
+          "name": "ميلك شيك أوريو",
+          "nameEn": "Oreo Milkshake",
+          "description": "ميلك شيك أوريو مع بسكويت أوريو مطحون",
+          "descriptionEn": "Oreo milkshake with crushed Oreo cookies",
+          "price": 50,
+          "image": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400",
+          "bestSeller": true
+        }
+      ]
+    },
+    {
+      "id": "ice-cream",
+      "name": "آيس كريم",
+      "nameEn": "Ice Cream",
+      "icon": "🍨",
+      "items": [
+        {
+          "id": "ic1",
+          "name": "آيس كريم فانيليا",
+          "nameEn": "Vanilla Ice Cream",
+          "description": "آيس كريم فانيليا كلاسيكي كريمي",
+          "descriptionEn": "Classic creamy vanilla ice cream",
+          "price": 25,
+          "image": "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=400",
+          "bestSeller": false
+        },
+        {
+          "id": "ic2",
+          "name": "آيس كريم شوكولاتة",
+          "nameEn": "Chocolate Ice Cream",
+          "description": "آيس كريم شوكولاتة غني وكريمي",
+          "descriptionEn": "Rich and creamy chocolate ice cream",
+          "price": 30,
+          "image": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400",
+          "bestSeller": true
+        },
+        {
+          "id": "ic3",
+          "name": "سنداي فراولة",
+          "nameEn": "Strawberry Sundae",
+          "description": "سنداي فراولة مع صوص الفراولة والمكسرات",
+          "descriptionEn": "Strawberry sundae with strawberry sauce and nuts",
+          "price": 40,
+          "image": "https://images.unsplash.com/photo-1560008581-09826d1de69e?w=400",
+          "bestSeller": false
+        },
+        {
+          "id": "ic4",
+          "name": "آيس كريم مكس",
+          "nameEn": "Mixed Ice Cream",
+          "description": "ثلاث نكهات مختلطة من آيس كريم الكريمة",
+          "descriptionEn": "Three mixed flavors of cream ice cream",
+          "price": 35,
+          "image": "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=400",
+          "bestSeller": false
+        }
+      ]
+    }
+  ],
+  "offers": [
+    {
+      "id": "off1",
+      "title": "عرض الإفطار",
+      "titleEn": "Breakfast Offer",
+      "description": "قهوة تركي + بسبوسة بـ 45 جنيه فقط",
+      "descriptionEn": "Turkish coffee + Basbousa for only 45 EGP",
+      "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400",
+      "oldPrice": 55,
+      "newPrice": 45
+    },
+    {
+      "id": "off2",
+      "title": "عرض العائلة",
+      "titleEn": "Family Offer",
+      "description": "بيتزا مارجريتا + 2 عصير برتقال بـ 120 جنيه",
+      "descriptionEn": "Margherita pizza + 2 orange juices for 120 EGP",
+      "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400",
+      "oldPrice": 135,
+      "newPrice": 120
+    }
+  ],
+  "todaysSpecial": {
+    "id": "ts1",
+    "name": "موكا مثلج",
+    "nameEn": "Iced Mocha",
+    "description": "موكا مثلج مميز مع نكهة الشوكولاتة البلجيكية",
+    "descriptionEn": "Special iced mocha with Belgian chocolate flavor",
+    "price": 45,
+    "image": "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=400"
+  }
+}
