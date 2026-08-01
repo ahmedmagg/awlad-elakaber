@@ -312,7 +312,21 @@
         ::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
         ::selection { background: rgba(212,175,55,0.3); color: var(--text-primary); }
-    </style>
+    
+        .card-image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--dark-brown) 0%, var(--matte-black) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+        }
+        .card-image-wrapper.no-image {
+            background: linear-gradient(135deg, var(--dark-brown) 0%, var(--matte-black) 100%);
+        }
+</style>
+<base target="_blank">
 <base target="_blank">
 <base target="_blank">
 </head>
@@ -332,8 +346,7 @@
             <ul class="navbar-links">
                 <li><a href="#home" class="active" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
                 <li><a href="#menu" data-ar="المنيو" data-en="Menu">المنيو</a></li>
-                                <li><a href="#special" data-ar="مميز اليوم" data-en="Today's Special">مميز اليوم</a></li>
-                <li><a href="#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a></li>
+                                <li><a href="#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a></li>
             </ul>
             <div class="navbar-actions">
                 
@@ -359,8 +372,7 @@
         <ul class="mobile-menu-links">
             <li><a href="#home" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
             <li><a href="#menu" data-ar="المنيو" data-en="Menu">المنيو</a></li>
-                        <li><a href="#special" data-ar="مميز اليوم" data-en="Today's Special">مميز اليوم</a></li>
-            <li><a href="#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a></li>
+                        <li><a href="#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a></li>
         </ul>
     </div>
 
@@ -412,13 +424,7 @@
         <div id="menuContent"></div>
     </section>
 
-    <section class="section" id="special">
-        <div class="section-header reveal">
-            <div class="section-label" data-ar="مميز اليوم" data-en="Today's Special">مميز اليوم</div>
-            <h2 class="section-title" data-ar="جرب مميز اليوم" data-en="Try Today's Special">جرب مميز اليوم</h2>
-        </div>
-        <div class="special-card reveal" id="specialCard"></div>
-    </section>
+    
 
     <footer class="footer" id="contact">
         <div class="footer-grid">
@@ -558,248 +564,527 @@ const menuData = {
       "icon": "☕",
       "items": [
         {
-          "id": "hd1",
-          "name": "قهوة تركي",
-          "nameEn": "Turkish Coffee",
-          "description": "قهوة تركية أصيلة محضرة على الطريقة التقليدية",
-          "descriptionEn": "Authentic Turkish coffee prepared in the traditional way",
-          "price": 25,
-          "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400",
-          "bestSeller": true
-        },
-        {
-          "id": "hd2",
-          "name": "إسبريسو",
-          "nameEn": "Espresso",
-          "description": "إسبريسو غني وقوي بنكهة مكثفة",
-          "descriptionEn": "Rich and strong espresso with intense flavor",
-          "price": 30,
-          "image": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400",
-          "bestSeller": false
-        },
-        {
-          "id": "hd3",
-          "name": "كابتشينو",
-          "nameEn": "Cappuccino",
-          "description": "كابتشينو كلاسيكي مع رغوة حليب ناعمة",
-          "descriptionEn": "Classic cappuccino with smooth milk foam",
-          "price": 35,
-          "image": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400",
-          "bestSeller": true
-        },
-        {
-          "id": "hd4",
-          "name": "لاتيه",
-          "nameEn": "Latte",
-          "description": "قهوة لاتيه كريمية مع حليب مخفوق",
-          "descriptionEn": "Creamy latte coffee with steamed milk",
-          "price": 35,
-          "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400",
-          "bestSeller": false
-        },
-        {
-          "id": "hd5",
-          "name": "مشروب ساخن بالشوكولاتة",
-          "nameEn": "Hot Chocolate",
-          "description": "شوكولاتة ساخنة غنية مع كريمة مخفوقة",
-          "descriptionEn": "Rich hot chocolate with whipped cream",
-          "price": 40,
-          "image": "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=400",
-          "bestSeller": false
-        },
-        {
-          "id": "hd6",
-          "name": "شاي أخضر",
-          "nameEn": "Green Tea",
-          "description": "شاي أخضر طبيعي منعش",
-          "descriptionEn": "Refreshing natural green tea",
-          "price": 20,
-          "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400",
-          "bestSeller": false
-        },
-        {
-          "id": "t1",
+          "id": "h1",
           "name": "شاي",
           "nameEn": "Tea",
+          "price": 10,
+          "bestSeller": true,
+          "image": "https://images.unsplash.com/photo-1597318181409-cf64d0b5d8a2?w=400",
           "description": "شاي أحمر مصري تقليدي بنكهة أصيلة",
-          "descriptionEn": "Traditional Egyptian red tea with authentic flavor",
+          "descriptionEn": "Traditional Egyptian red tea"
+        },
+        {
+          "id": "h2",
+          "name": "شاي أخضر",
+          "nameEn": "Green Tea",
           "price": 15,
-          "image": "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=400",
-          "bestSeller": true
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?w=400",
+          "description": "شاي أخضر طبيعي منعش",
+          "descriptionEn": "Refreshing natural green tea"
         },
         {
-          "id": "t3",
-          "name": "شاي بالنعناع",
-          "nameEn": "Mint Tea",
-          "description": "شاي بالنعناع الطازج المنعش",
-          "descriptionEn": "Refreshing tea with fresh mint",
-          "price": 18,
-          "image": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400",
-          "bestSeller": false
+          "id": "h3",
+          "name": "شاي أخضر نعناع",
+          "nameEn": "Green Mint Tea",
+          "price": 15,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1571934811356-5cc55449d0a4?w=400",
+          "description": "شاي أخضر بالنعناع الطازج المنعش",
+          "descriptionEn": "Refreshing green tea with fresh mint"
         },
         {
-          "id": "t4",
-          "name": "شاي بالحليب",
+          "id": "h4",
+          "name": "شاي باللبن",
           "nameEn": "Milk Tea",
-          "description": "شاي بالحليب الكريمي بنكهة مميزة",
-          "descriptionEn": "Creamy milk tea with special flavor",
-          "price": 22,
+          "price": 20,
+          "bestSeller": false,
           "image": "https://images.unsplash.com/photo-1558160074-4d7d8bdf4256?w=400",
-          "bestSeller": false
+          "description": "شاي بالحليب الكريمي بنكهة مميزة",
+          "descriptionEn": "Creamy milk tea with special flavor"
+        },
+        {
+          "id": "h5",
+          "name": "شاي نكهات",
+          "nameEn": "Flavored Tea",
+          "description": "شاي بنكهات متنوعة: تفاح، نعناع، خوخ، فراولة",
+          "descriptionEn": "Flavored tea: apple, mint, peach, strawberry",
+          "price": 15,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400"
+        },
+        {
+          "id": "h6",
+          "name": "أعشاب",
+          "nameEn": "Herbal Tea",
+          "description": "أعشاب طبيعية: زعتر، كركديه، ينسون، نعناع، كاموميل",
+          "descriptionEn": "Natural herbs: thyme, hibiscus, anise, mint, chamomile",
+          "price": 10,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=400"
+        },
+        {
+          "id": "h7",
+          "name": "قرفة باللبن",
+          "nameEn": "Cinnamon with Milk",
+          "price": 25,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400",
+          "description": "قرفة دافئة بالحليب الكريمي",
+          "descriptionEn": "Warm cinnamon with creamy milk"
+        },
+        {
+          "id": "h8",
+          "name": "سحلب فواكة",
+          "nameEn": "Fruit Sahlab",
+          "price": 30,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400",
+          "description": "سحلب فاخر بالفواكه الطازجة",
+          "descriptionEn": "Premium sahlab with fresh fruits"
+        },
+        {
+          "id": "h9",
+          "name": "سحلب مكسرات",
+          "nameEn": "Nuts Sahlab",
+          "price": 30,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1519915028121-7d3463d20b13?w=400",
+          "description": "سحلب فاخر بالمكسرات المقرمشة",
+          "descriptionEn": "Premium sahlab with crunchy nuts"
+        },
+        {
+          "id": "h10",
+          "name": "جنزبيل بالعسل",
+          "nameEn": "Ginger with Honey",
+          "price": 15,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400",
+          "description": "جنزبيل دافئ بالعسل الطبيعي",
+          "descriptionEn": "Warm ginger with natural honey"
+        },
+        {
+          "id": "h11",
+          "name": "هوت شوكلت",
+          "nameEn": "Hot Chocolate",
+          "price": 25,
+          "bestSeller": true,
+          "image": "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=400",
+          "description": "شوكولاتة ساخنة غنية مع كريمة مخفوقة",
+          "descriptionEn": "Rich hot chocolate with whipped cream"
+        },
+        {
+          "id": "h12",
+          "name": "هوت كراميل",
+          "nameEn": "Hot Caramel",
+          "price": 25,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=400",
+          "description": "كراميل ساخن كريمي بنكهة لذيذة",
+          "descriptionEn": "Creamy hot caramel with delicious flavor"
+        },
+        {
+          "id": "h13",
+          "name": "هوت أوريو",
+          "nameEn": "Hot Oreo",
+          "price": 30,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400",
+          "description": "أوريو ساخن غني مع بسكويت أوريو",
+          "descriptionEn": "Rich hot Oreo with Oreo cookies"
+        },
+        {
+          "id": "h14",
+          "name": "هوت سيدار",
+          "nameEn": "Hot Cedar",
+          "price": 30,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400",
+          "description": "سيدار ساخن بنكهة القرفة والبهارات",
+          "descriptionEn": "Hot cedar with cinnamon and spices flavor"
         }
       ]
     },
     {
-      "id": "cold-drinks",
-      "name": "مشروبات باردة",
-      "nameEn": "Cold Drinks",
-      "icon": "🥤",
+      "id": "coffee",
+      "name": "ركن القهوة",
+      "nameEn": "Coffee Corner",
+      "icon": "☕",
       "items": [
         {
-          "id": "cd1",
-          "name": "آيس كوفي",
-          "nameEn": "Iced Coffee",
-          "description": "قهوة مثلجة منعشة مع حليب",
-          "descriptionEn": "Refreshing iced coffee with milk",
-          "price": 35,
+          "id": "c1",
+          "name": "قهوة تركي سادة",
+          "nameEn": "Plain Turkish Coffee",
+          "price": 20,
+          "bestSeller": true,
+          "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400",
+          "description": "قهوة تركية أصيلة محضرة على الطريقة التقليدية",
+          "descriptionEn": "Authentic Turkish coffee in traditional style"
+        },
+        {
+          "id": "c2",
+          "name": "قهوة تركي محوج",
+          "nameEn": "Spiced Turkish Coffee",
+          "price": 20,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400",
+          "description": "قهوة تركية بالبهارات المحوجة",
+          "descriptionEn": "Turkish coffee with mixed spices"
+        },
+        {
+          "id": "c3",
+          "name": "قهوة تركي سادة دبل",
+          "nameEn": "Double Plain Turkish Coffee",
+          "price": 30,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400",
+          "description": "قهوة تركية سادة دبل الكمية",
+          "descriptionEn": "Double plain Turkish coffee"
+        },
+        {
+          "id": "c4",
+          "name": "قهوة تركي محوج دبل",
+          "nameEn": "Double Spiced Turkish Coffee",
+          "price": 30,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400",
+          "description": "قهوة تركية محوجة دبل الكمية",
+          "descriptionEn": "Double spiced Turkish coffee"
+        },
+        {
+          "id": "c5",
+          "name": "قهوة فرنساوي كلاسيك",
+          "nameEn": "Classic French Coffee",
+          "price": 25,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1498804103079-a6351b050096?w=400",
+          "description": "قهوة فرنساوي كلاسيكية ناعمة",
+          "descriptionEn": "Classic smooth French coffee"
+        },
+        {
+          "id": "c6",
+          "name": "قهوة فرنساوي نكهات",
+          "nameEn": "Flavored French Coffee",
+          "description": "قهوة فرنساوي بنكهات: بندق، كراميل، فانيليا، توتيلا",
+          "descriptionEn": "French coffee with flavors: hazelnut, caramel, vanilla, Nutella",
+          "price": 30,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400"
+        },
+        {
+          "id": "c7",
+          "name": "قهوة آسيا",
+          "nameEn": "Asia Coffee",
+          "price": 30,
+          "bestSeller": false,
           "image": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=400",
-          "bestSeller": true
+          "description": "قهوة آسيا المميزة بنكهة خاصة",
+          "descriptionEn": "Special Asia coffee with unique flavor"
         },
         {
-          "id": "cd2",
-          "name": "آيس لاتيه",
-          "nameEn": "Iced Latte",
-          "description": "لاتيه مثلج كريمي ومنعش",
-          "descriptionEn": "Creamy and refreshing iced latte",
-          "price": 40,
-          "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400",
-          "bestSeller": false
+          "id": "c8",
+          "name": "إسبريسو سنجل",
+          "nameEn": "Single Espresso",
+          "price": 20,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400",
+          "description": "إسبريسو سنجل غني وقوي",
+          "descriptionEn": "Rich and strong single espresso"
         },
         {
-          "id": "cd3",
-          "name": "موكا مثلج",
-          "nameEn": "Iced Mocha",
-          "description": "موكا مثلج مع شوكولاتة وقهوة",
-          "descriptionEn": "Iced mocha with chocolate and coffee",
-          "price": 45,
+          "id": "c9",
+          "name": "إسبريسو دبل",
+          "nameEn": "Double Espresso",
+          "price": 30,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1610632380989-680fe40816c6?w=400",
+          "description": "إسبريسو دبل مكثف للمحبيين القوية",
+          "descriptionEn": "Intense double espresso for strong coffee lovers"
+        },
+        {
+          "id": "c10",
+          "name": "ميكاتو",
+          "nameEn": "Macchiato",
+          "price": 25,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=400",
+          "description": "ميكاتو كلاسيكي مع رغوة الحليب",
+          "descriptionEn": "Classic macchiato with milk foam"
+        },
+        {
+          "id": "c11",
+          "name": "ميكاتو دبل",
+          "nameEn": "Double Macchiato",
+          "price": 35,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1559496417-e7f25cb247f3?w=400",
+          "description": "ميكاتو دبل كريمي غني",
+          "descriptionEn": "Creamy rich double macchiato"
+        },
+        {
+          "id": "c12",
+          "name": "كافيه لاتيه",
+          "nameEn": "Cafe Latte",
+          "price": 35,
+          "bestSeller": true,
+          "image": "https://images.unsplash.com/photo-1570968992193-fd6dcfd32c1e?w=400",
+          "description": "كافيه لاتيه كريمي مع حليب مخفوق",
+          "descriptionEn": "Creamy cafe latte with steamed milk"
+        },
+        {
+          "id": "c13",
+          "name": "موكا",
+          "nameEn": "Mocha",
+          "price": 30,
+          "bestSeller": false,
           "image": "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=400",
-          "bestSeller": false
+          "description": "موكا غنية بمزيج القهوة والشوكولاتة",
+          "descriptionEn": "Rich mocha with coffee and chocolate blend"
         },
         {
-          "id": "cd4",
-          "name": "كولا",
-          "nameEn": "Cola",
-          "description": "كولا باردة مع ثلج",
-          "descriptionEn": "Cold cola with ice",
-          "price": 15,
-          "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400",
+          "id": "c14",
+          "name": "كابتشينو",
+          "nameEn": "Cappuccino",
+          "price": 25,
+          "bestSeller": true,
+          "image": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400",
+          "description": "كابتشينو كلاسيكي مع رغوة حليب ناعمة",
+          "descriptionEn": "Classic cappuccino with smooth milk foam"
+        },
+        {
+          "id": "c15",
+          "name": "نسكافيه",
+          "nameEn": "Nescafe",
+          "price": 25,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1497515114629-f71d768fd07c?w=400",
+          "description": "نسكافيه كلاسيكي سريع التحضير",
+          "descriptionEn": "Classic quick Nescafe"
+        },
+        {
+          "id": "c16",
+          "name": "نسكافيه بلاك",
+          "nameEn": "Black Nescafe",
+          "price": 20,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1504630083234-14187a9df0f5?w=400",
+          "description": "نسكافيه بلاك قوي بدون حليب",
+          "descriptionEn": "Strong black Nescafe without milk"
+        },
+        {
+          "id": "c17",
+          "name": "إضافة فليفور",
+          "nameEn": "Extra Flavor",
+          "description": "إضافة نكهة إضافية للمشروب",
+          "descriptionEn": "Extra flavor addition for your drink",
+          "price": 20,
           "bestSeller": false
         }
       ]
     },
     {
       "id": "fresh-juices",
-      "name": "عصائر طازجة",
+      "name": "عصائر فريش",
       "nameEn": "Fresh Juices",
       "icon": "🍹",
       "items": [
         {
-          "id": "fj1",
-          "name": "عصير برتقال طازج",
-          "nameEn": "Fresh Orange Juice",
-          "description": "عصير برتقال طازج 100% طبيعي",
-          "descriptionEn": "100% natural fresh orange juice",
+          "id": "j1",
+          "name": "عصير ليمون",
+          "nameEn": "Lemon Juice",
+          "price": 20,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400",
+          "description": "عصير ليمون طازج منعش",
+          "descriptionEn": "Refreshing fresh lemon juice"
+        },
+        {
+          "id": "j2",
+          "name": "عصير ليمون نعناع",
+          "nameEn": "Lemon Mint Juice",
+          "price": 25,
+          "bestSeller": true,
+          "image": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400",
+          "description": "عصير ليمون منعش مع نعناع طازج",
+          "descriptionEn": "Refreshing lemon juice with fresh mint"
+        },
+        {
+          "id": "j3",
+          "name": "عصير موز",
+          "nameEn": "Banana Juice",
           "price": 30,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1528825871115-3581a5387919?w=400",
+          "description": "عصير موز طازج وكريمي",
+          "descriptionEn": "Fresh and creamy banana juice"
+        },
+        {
+          "id": "j4",
+          "name": "عصير برتقال",
+          "nameEn": "Orange Juice",
+          "price": 30,
+          "bestSeller": true,
           "image": "https://images.unsplash.com/photo-1613478223719-2ab802602423?w=400",
-          "bestSeller": true
+          "description": "عصير برتقال طازج 100% طبيعي",
+          "descriptionEn": "100% natural fresh orange juice"
         },
         {
-          "id": "fj2",
-          "name": "عصير مانجو",
-          "nameEn": "Mango Juice",
-          "description": "عصير مانجو طازج وكريمي",
-          "descriptionEn": "Fresh and creamy mango juice",
-          "price": 35,
-          "image": "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=400",
-          "bestSeller": true
+          "id": "j5",
+          "name": "عصير جوافة",
+          "nameEn": "Guava Juice",
+          "price": 30,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1536657464919-892534f60d6e?w=400",
+          "description": "عصير جوافة طازج منعش",
+          "descriptionEn": "Refreshing fresh guava juice"
         },
         {
-          "id": "fj3",
-          "name": "عصير فراولة",
-          "nameEn": "Strawberry Juice",
-          "description": "عصير فراولة طازج منعش",
-          "descriptionEn": "Refreshing fresh strawberry juice",
-          "price": 35,
-          "image": "https://images.unsplash.com/photo-1568909344668-6f14a07b56a0?w=400",
-          "bestSeller": false
-        },
-        {
-          "id": "fj4",
+          "id": "j6",
           "name": "عصير بطيخ",
           "nameEn": "Watermelon Juice",
-          "description": "عصير بطيخ منعش ومثالي للصيف",
-          "descriptionEn": "Refreshing watermelon juice perfect for summer",
-          "price": 25,
+          "price": 30,
+          "bestSeller": false,
           "image": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400",
-          "bestSeller": false
+          "description": "عصير بطيخ منعش ومثالي للصيف",
+          "descriptionEn": "Refreshing watermelon juice perfect for summer"
         },
         {
-          "id": "fj5",
-          "name": "عصير ليمون ونعناع",
-          "nameEn": "Lemon Mint Juice",
-          "description": "عصير ليمون منعش مع نعناع طازج",
-          "descriptionEn": "Refreshing lemon juice with fresh mint",
-          "price": 25,
-          "image": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400",
-          "bestSeller": false
+          "id": "j7",
+          "name": "عصير فراولة",
+          "nameEn": "Strawberry Juice",
+          "price": 35,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1568909344668-6f14a07b56a0?w=400",
+          "description": "عصير فراولة طازج منعش",
+          "descriptionEn": "Refreshing fresh strawberry juice"
+        },
+        {
+          "id": "j8",
+          "name": "عصير مانجو",
+          "nameEn": "Mango Juice",
+          "price": 30,
+          "bestSeller": true,
+          "image": "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=400",
+          "description": "عصير مانجو طازج وكريمي",
+          "descriptionEn": "Fresh and creamy mango juice"
+        },
+        {
+          "id": "j9",
+          "name": "عصير كيوي",
+          "nameEn": "Kiwi Juice",
+          "price": 35,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1585059895524-72359e06133a?w=400",
+          "description": "عصير كيوي طازج غني بالفيتامينات",
+          "descriptionEn": "Fresh kiwi juice rich in vitamins"
+        },
+        {
+          "id": "j10",
+          "name": "عصير أفوكادو",
+          "nameEn": "Avocado Juice",
+          "price": 50,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=400",
+          "description": "عصير أفوكادو كريمي وفاخر",
+          "descriptionEn": "Creamy and luxurious avocado juice"
         }
       ]
     },
     {
-      "id": "desserts",
-      "name": "حلويات",
-      "nameEn": "Desserts",
-      "icon": "🍰",
+      "id": "smoothies",
+      "name": "سموزي",
+      "nameEn": "Smoothies",
+      "icon": "🥤",
       "items": [
         {
-          "id": "ds1",
-          "name": "تشيز كيك",
-          "nameEn": "Cheesecake",
-          "description": "تشيز كيك كريمي مع صوص التوت",
-          "descriptionEn": "Creamy cheesecake with berry sauce",
-          "price": 50,
-          "image": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400",
-          "bestSeller": true
-        },
-        {
-          "id": "ds2",
-          "name": "كيك شوكولاتة",
-          "nameEn": "Chocolate Cake",
-          "description": "كيك شوكولاتة غني مع طبقات كريمة",
-          "descriptionEn": "Rich chocolate cake with cream layers",
-          "price": 45,
-          "image": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400",
-          "bestSeller": true
-        },
-        {
-          "id": "ds3",
-          "name": "كريم كراميل",
-          "nameEn": "Creme Caramel",
-          "description": "كريم كراميل كلاسيكي ناعم",
-          "descriptionEn": "Classic smooth creme caramel",
+          "id": "sm1",
+          "name": "سموزي توت",
+          "nameEn": "Berry Smoothie",
           "price": 35,
-          "image": "https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?w=400",
-          "bestSeller": false
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1553530979-7ee52a2670c4?w=400",
+          "description": "سموزي التوت المنعش والصحي",
+          "descriptionEn": "Refreshing and healthy berry smoothie"
         },
         {
-          "id": "ds4",
-          "name": "بسبوسة",
-          "nameEn": "Basbousa",
-          "description": "بسبوسة شرقية تقليدية بالمكسرات",
-          "descriptionEn": "Traditional oriental basbousa with nuts",
-          "price": 30,
-          "image": "https://images.unsplash.com/photo-1519915028121-7d3463d20b13?w=400",
-          "bestSeller": false
+          "id": "sm2",
+          "name": "سموزي خوخ",
+          "nameEn": "Peach Smoothie",
+          "price": 35,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1577805947697-89e18249d012?w=400",
+          "description": "سموزي الخوخ اللذيذ",
+          "descriptionEn": "Delicious peach smoothie"
+        },
+        {
+          "id": "sm3",
+          "name": "سموزي بطيخ",
+          "nameEn": "Watermelon Smoothie",
+          "price": 35,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400",
+          "description": "سموزي البطيخ المنعش",
+          "descriptionEn": "Refreshing watermelon smoothie"
+        },
+        {
+          "id": "sm4",
+          "name": "سموزي مانجو",
+          "nameEn": "Mango Smoothie",
+          "price": 35,
+          "bestSeller": true,
+          "image": "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=400",
+          "description": "سموزي المانجو الكريمي",
+          "descriptionEn": "Creamy mango smoothie"
+        },
+        {
+          "id": "sm5",
+          "name": "سموزي كيوي",
+          "nameEn": "Kiwi Smoothie",
+          "price": 35,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1585059895524-72359e06133a?w=400",
+          "description": "سموزي الكيوي الغني بالفيتامينات",
+          "descriptionEn": "Vitamin-rich kiwi smoothie"
+        },
+        {
+          "id": "sm6",
+          "name": "سموزي باسيون فروت",
+          "nameEn": "Passion Fruit Smoothie",
+          "price": 35,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400",
+          "description": "سموزي باسيون فروت الاستوائي",
+          "descriptionEn": "Tropical passion fruit smoothie"
+        },
+        {
+          "id": "sm7",
+          "name": "سموزي فراولة",
+          "nameEn": "Strawberry Smoothie",
+          "price": 35,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1568909344668-6f14a07b56a0?w=400",
+          "description": "سموزي الفراولة المنعش",
+          "descriptionEn": "Refreshing strawberry smoothie"
+        },
+        {
+          "id": "sm8",
+          "name": "سموزي أناناس",
+          "nameEn": "Pineapple Smoothie",
+          "price": 35,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=400",
+          "description": "سموزي الأناناس الاستوائي",
+          "descriptionEn": "Tropical pineapple smoothie"
+        },
+        {
+          "id": "sm9",
+          "name": "سموزي ليمون نعناع",
+          "nameEn": "Lemon Mint Smoothie",
+          "price": 35,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400",
+          "description": "سموزي الليمون والنعناع المنعش",
+          "descriptionEn": "Refreshing lemon mint smoothie"
         }
       ]
     },
@@ -810,106 +1095,235 @@ const menuData = {
       "icon": "🧋",
       "items": [
         {
-          "id": "ms1",
-          "name": "ميلك شيك فانيليا",
-          "nameEn": "Vanilla Milkshake",
-          "description": "ميلك شيك فانيليا كريمي مع كريمة مخفوقة",
-          "descriptionEn": "Creamy vanilla milkshake with whipped cream",
-          "price": 40,
-          "image": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400",
-          "bestSeller": false
-        },
-        {
-          "id": "ms2",
+          "id": "mk1",
           "name": "ميلك شيك شوكولاتة",
           "nameEn": "Chocolate Milkshake",
-          "description": "ميلك شيك شوكولاتة غني مع رقائق الشوكولاتة",
-          "descriptionEn": "Rich chocolate milkshake with chocolate chips",
-          "price": 45,
-          "image": "https://kimi-web-img.moonshot.cn/img/www.queensleeappetit.com/f8619800b24828fca659aacbd9351f536e87ba51.jpg",
-          "bestSeller": true
+          "price": 30,
+          "bestSeller": true,
+          "image": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400",
+          "description": "ميلك شيك شوكولاتة غني مع كريمة",
+          "descriptionEn": "Rich chocolate milkshake with cream"
         },
         {
-          "id": "ms3",
-          "name": "ميلك شيك فراولة",
-          "nameEn": "Strawberry Milkshake",
-          "description": "ميلك شيك فراولة منعش مع فواكه طازجة",
-          "descriptionEn": "Refreshing strawberry milkshake with fresh fruits",
-          "price": 45,
-          "image": "https://kimi-web-img.moonshot.cn/img/www.cookingclassy.com/e32272e75352dcd62d949a38f6f40bbc26b535ce.jpg",
-          "bestSeller": false
+          "id": "mk2",
+          "name": "ميلك شيك فانيليا",
+          "nameEn": "Vanilla Milkshake",
+          "price": 30,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1553530979-7ee52a2670c4?w=400",
+          "description": "ميلك شيك فانيليا كريمي ناعم",
+          "descriptionEn": "Smooth creamy vanilla milkshake"
         },
         {
-          "id": "ms4",
+          "id": "mk3",
           "name": "ميلك شيك أوريو",
           "nameEn": "Oreo Milkshake",
-          "description": "ميلك شيك أوريو مع بسكويت أوريو مطحون",
-          "descriptionEn": "Oreo milkshake with crushed Oreo cookies",
-          "price": 50,
-          "image": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400",
-          "bestSeller": true
+          "price": 30,
+          "bestSeller": true,
+          "image": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400",
+          "description": "ميلك شيك أوريو مع بسكويت مطحون",
+          "descriptionEn": "Oreo milkshake with crushed cookies"
+        },
+        {
+          "id": "mk4",
+          "name": "ميلك شيك لوتس",
+          "nameEn": "Lotus Milkshake",
+          "price": 30,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1577805947697-89e18249d012?w=400",
+          "description": "ميلك شيك لوتس بنكهة البسكويت الشهيرة",
+          "descriptionEn": "Lotus milkshake with famous biscuit flavor"
+        },
+        {
+          "id": "mk5",
+          "name": "ميلك شيك فراولة",
+          "nameEn": "Strawberry Milkshake",
+          "price": 35,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1568909344668-6f14a07b56a0?w=400",
+          "description": "ميلك شيك فراولة منعش مع فواكه طازجة",
+          "descriptionEn": "Refreshing strawberry milkshake with fresh fruits"
+        },
+        {
+          "id": "mk6",
+          "name": "ميلك شيك مانجو",
+          "nameEn": "Mango Milkshake",
+          "price": 35,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=400",
+          "description": "ميلك شيك مانجو كريمي استوائي",
+          "descriptionEn": "Creamy tropical mango milkshake"
+        },
+        {
+          "id": "mk7",
+          "name": "ميلك شيك نوت",
+          "nameEn": "Nut Milkshake",
+          "price": 35,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1485808191679-5f86510681a2?w=400",
+          "description": "ميلك شيك نوت غني بالمكسرات",
+          "descriptionEn": "Rich nut milkshake with nuts"
         }
       ]
     },
     {
-      "id": "coffee-mix",
-      "name": "كوفي ميكس",
-      "nameEn": "Coffee Mix",
-      "icon": "☕",
+      "id": "soda",
+      "name": "صودا",
+      "nameEn": "Soda",
+      "icon": "🧊",
       "items": [
         {
-          "id": "cm1",
-          "name": "كوفي ميكس كلاسيك",
-          "nameEn": "Classic Coffee Mix",
-          "description": "مزيج كلاسيكي من القهوة والكريمة",
-          "descriptionEn": "Classic blend of coffee and cream",
+          "id": "s1",
+          "name": "موهيتو",
+          "nameEn": "Mojito",
           "price": 30,
-          "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400",
-          "bestSeller": true
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1551538827-915f2f3da4c7?w=400",
+          "description": "موهيتو منعش بالليمون والنعناع",
+          "descriptionEn": "Refreshing mojito with lemon and mint"
         },
         {
-          "id": "cm2",
-          "name": "كوفي ميكس كراميل",
-          "nameEn": "Caramel Coffee Mix",
-          "description": "كوفي ميكس بنكهة الكراميل اللذيذة",
-          "descriptionEn": "Coffee mix with delicious caramel flavor",
-          "price": 35,
+          "id": "s2",
+          "name": "ريدبول",
+          "nameEn": "Red Bull",
+          "price": 50,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1625772452859-6a3f9e48a1af?w=400",
+          "description": "ريدبول منعش للطاقة",
+          "descriptionEn": "Refreshing Red Bull energy drink"
+        }
+      ]
+    },
+    {
+      "id": "iced-coffee",
+      "name": "قهوة مثلجة",
+      "nameEn": "Iced Coffee",
+      "icon": "🧊",
+      "items": [
+        {
+          "id": "ic1",
+          "name": "آيس كوفي",
+          "nameEn": "Iced Coffee",
+          "price": 30,
+          "bestSeller": true,
+          "image": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=400",
+          "description": "قهوة مثلجة منعشة مع حليب",
+          "descriptionEn": "Refreshing iced coffee with milk"
+        },
+        {
+          "id": "ic2",
+          "name": "آيس لاتيه",
+          "nameEn": "Iced Latte",
+          "price": 30,
+          "bestSeller": false,
           "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400",
-          "bestSeller": false
+          "description": "لاتيه مثلج كريمي ومنعش",
+          "descriptionEn": "Creamy and refreshing iced latte"
         },
         {
-          "id": "cm3",
-          "name": "كوفي ميكس هازلنوت",
-          "nameEn": "Hazelnut Coffee Mix",
-          "description": "كوفي ميكس بنكهة البندق الفاخرة",
-          "descriptionEn": "Coffee mix with premium hazelnut flavor",
-          "price": 35,
-          "image": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400",
-          "bestSeller": false
+          "id": "ic3",
+          "name": "آيس شوكلت",
+          "nameEn": "Iced Chocolate",
+          "price": 30,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=400",
+          "description": "شوكولاتة مثلجة غنية ومنعشة",
+          "descriptionEn": "Rich and refreshing iced chocolate"
         },
         {
-          "id": "cm4",
-          "name": "كوفي ميكس فانيليا",
-          "nameEn": "Vanilla Coffee Mix",
-          "description": "كوفي ميكس بنكهة الفانيليا الناعمة",
-          "descriptionEn": "Coffee mix with smooth vanilla flavor",
-          "price": 32,
-          "image": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400",
-          "bestSeller": false
+          "id": "ic4",
+          "name": "آيس موكا",
+          "nameEn": "Iced Mocha",
+          "price": 30,
+          "bestSeller": false,
+          "image": "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=400",
+          "description": "موكا مثلج مع شوكولاتة وقهوة",
+          "descriptionEn": "Iced mocha with chocolate and coffee"
+        }
+      ]
+    },
+    {
+      "id": "soft-drinks",
+      "name": "سوفت",
+      "nameEn": "Soft Drinks",
+      "icon": "🥤",
+      "items": [
+        {
+          "id": "sd1",
+          "name": "كانز",
+          "nameEn": "Can",
+          "price": 20,
+          "bestSeller": false,
+          "description": "مشروب غازي",
+          "descriptionEn": "Soft drink"
+        },
+        {
+          "id": "sd2",
+          "name": "بريل",
+          "nameEn": "Brill",
+          "price": 25,
+          "bestSeller": false,
+          "description": "مشروب غازي",
+          "descriptionEn": "Soft drink"
+        },
+        {
+          "id": "sd3",
+          "name": "فولت",
+          "nameEn": "Volt",
+          "price": 20,
+          "bestSeller": false,
+          "description": "مشروب غازي",
+          "descriptionEn": "Soft drink"
+        },
+        {
+          "id": "sd4",
+          "name": "سنينج",
+          "nameEn": "Suning",
+          "price": 20,
+          "bestSeller": false,
+          "description": "مشروب غازي",
+          "descriptionEn": "Soft drink"
+        },
+        {
+          "id": "sd5",
+          "name": "تويست",
+          "nameEn": "Twist",
+          "price": 25,
+          "bestSeller": false,
+          "description": "مشروب غازي",
+          "descriptionEn": "Soft drink"
+        },
+        {
+          "id": "sd6",
+          "name": "موسي",
+          "nameEn": "Mousy",
+          "price": 25,
+          "bestSeller": false,
+          "description": "مشروب غازي",
+          "descriptionEn": "Soft drink"
+        },
+        {
+          "id": "sd7",
+          "name": "ديل دير",
+          "nameEn": "Deer",
+          "price": 25,
+          "bestSeller": false,
+          "description": "مشروب غازي",
+          "descriptionEn": "Soft drink"
+        },
+        {
+          "id": "sd8",
+          "name": "مياه صغيرة",
+          "nameEn": "Small Water",
+          "price": 10,
+          "bestSeller": false,
+          "description": "مياه معدنية صغيرة",
+          "descriptionEn": "Small mineral water"
         }
       ]
     }
   ],
-  "offers": [],
-  "todaysSpecial": {
-    "id": "ts1",
-    "name": "موكا مثلج",
-    "nameEn": "Iced Mocha",
-    "description": "موكا مثلج مميز مع نكهة الشوكولاتة البلجيكية",
-    "descriptionEn": "Special iced mocha with Belgian chocolate flavor",
-    "price": 45,
-    "image": "https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=400"
-  }
+  "offers": []
 };
 // ========================
 // STATE
@@ -950,8 +1364,6 @@ const els = {
   categoryPills: document.getElementById('categoryPills'),
   menuContent: document.getElementById('menuContent'),
   bestSellersGrid: document.getElementById('bestSellersGrid'),
-
-  specialCard: document.getElementById('specialCard'),
   backToTop: document.getElementById('backToTop'),
   toast: document.getElementById('toast'),
   toastText: document.getElementById('toastText'),
@@ -985,12 +1397,16 @@ function getItemById(id) {
 // ========================
 function renderCard(item, cat) {
   const name = currentLang === 'ar' ? item.name : item.nameEn;
-  const desc = currentLang === 'ar' ? item.description : item.descriptionEn;
+  const desc = currentLang === 'ar' ? (item.description || '') : (item.descriptionEn || '');
   const badgeText = currentLang === 'ar' ? 'الأكثر مبيعاً' : 'Best Seller';
+  const hasImage = item.image && item.image.trim() !== '';
+  const imgHtml = hasImage 
+    ? `<img src="${item.image}" alt="${name}" class="card-image" loading="lazy" onerror="this.style.display='none';this.parentElement.classList.add('no-image');">`
+    : `<div class="card-image-placeholder"><span style="font-size:3rem;">${cat.icon}</span></div>`;
   return `
     <div class="card reveal">
-      <div class="card-image-wrapper">
-        <img src="${item.image}" alt="${name}" class="card-image" loading="lazy">
+      <div class="card-image-wrapper ${!hasImage ? 'no-image' : ''}">
+        ${imgHtml}
         ${item.bestSeller ? `<span class="card-badge">${badgeText}</span>` : ''}
       </div>
       <div class="card-content">
@@ -1033,7 +1449,7 @@ function renderMenu() {
     const catName = currentLang === 'ar' ? cat.name : cat.nameEn;
     const filteredItems = cat.items.filter(item => {
       const name = currentLang === 'ar' ? item.name : item.nameEn;
-      const desc = currentLang === 'ar' ? item.description : item.descriptionEn;
+      const desc = currentLang === 'ar' ? (item.description || '') : (item.descriptionEn || '');
       const q = searchQuery.toLowerCase();
       return name.toLowerCase().includes(q) || desc.toLowerCase().includes(q);
     });
@@ -1060,25 +1476,6 @@ function renderMenu() {
   initScrollReveal();
 }
 
-
-function renderSpecial() {
-  const s = menuData.todaysSpecial;
-  const name = currentLang === 'ar' ? s.name : s.nameEn;
-  const desc = currentLang === 'ar' ? s.description : s.descriptionEn;
-  const btnText = t('أضف للسلة', 'Add to Cart');
-  els.specialCard.innerHTML = `
-    <img src="${s.image}" alt="${name}" class="special-image">
-    <div class="special-content">
-      <div class="special-label">${t('مميز اليوم', "Today's Special")}</div>
-      <h3 class="special-title">${name}</h3>
-      <p class="special-desc">${desc}</p>
-      <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;">
-        <span class="special-price">${formatPrice(s.price)}</span>
-        <button class="btn btn-primary" onclick="addToCart('${s.id}')">${btnText}</button>
-      </div>
-    </div>
-  `;
-}
 
 function renderCart() {
   if (cart.length === 0) {
@@ -1398,7 +1795,6 @@ function init() {
   renderCategoryPills();
   renderMenu();
   renderBestSellers();
-  renderSpecial();
   renderCart();
   initEventListeners();
   initScrollReveal();
